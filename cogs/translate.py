@@ -2,8 +2,9 @@ import discord
 import os
 import deepl
 from discord.ext import commands
+from dotenv import load_dotenv
 
-
+load_dotenv()
 DEEPL = os.getenv('DEEPL_AUTH')
 
 class Translate(commands.Cog):
