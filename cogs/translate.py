@@ -1,5 +1,10 @@
 import discord
+import os
+import deepl
 from discord.ext import commands
+
+
+DEEPL = os.getenv('DEEPL_AUTH')
 
 class Translate(commands.Cog):
 
@@ -8,7 +13,7 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Translator is online')
+        print('TranslatorCog loaded')
 
     @commands.command()
     async def ping(self, ctx):
