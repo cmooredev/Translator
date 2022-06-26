@@ -18,23 +18,7 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        username = str(message.author).split('#')[0]
-        user_message = str(message.content)
-        if message.author == self.client.user:
-            return
-        #if user has "Translate" role, their message is translated
-        if 'Translate' in str(message.author.roles):
-            translator = deepl.Translator(DEEPL_AUTH)
-            result = translator.translate_text(user_message, target_lang='EN-US')
-            if result.detected_source_lang != 'EN':
-                #send translated text
-                embed=discord.Embed(title=message.author.display_name,
-                description=result, color=0xFF5733)
-                embed.set_thumbnail(url=message.author.avatar_url)
-                await self.message.channel.send(embed=embed)
-                #delete previously sent message
-                if params["delete_source"] == "true":
-                    await message.delete()
+        await message.channel.send(message.author.mention)
 
     @commands.command()
     async def ping(self, ctx):
