@@ -39,6 +39,3 @@ class Translate(commands.Cog):
 
 async def setup(client):
     await client.add_cog(Translate(client))
-
-    if message.author == self.client.user:
-        return
