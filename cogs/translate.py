@@ -17,7 +17,7 @@ class Translate(commands.Cog):
         print('TranslatorCog loaded')
 
     @commands.Cog.listener()
-    async def on_message(message):
+    async def on_message(self, message):
         username = str(message.author).split('#')[0]
         user_message = str(message.content)
         if message.author == self.client.user:
@@ -26,7 +26,7 @@ class Translate(commands.Cog):
         if 'Translate' in str(message.author.roles):
             translator = deepl.Translator(DEEPL_AUTH)
             result = translator.translate_text(user_message, target_lang='EN-US')
-            if result.detected_source_lang != "EN":
+            if result.detected_source_lang != 'EN':
                 #send translated text
                 embed=discord.Embed(title=message.author.display_name,
                 description=result, color=0xFF5733)
