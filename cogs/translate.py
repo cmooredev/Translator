@@ -25,7 +25,7 @@ class Translate(commands.Cog):
         #if user has "Translate" role, their message is translated
         if 'Translate' in str(message.author.roles):
             translator = deepl.Translator(DEEPL_AUTH)
-            result = translator.translate_text(user_message, target_lang=params['de$
+            result = translator.translate_text(user_message, target_lang='EN-US')
             if result.detected_source_lang != "EN":
                 #send translated text
                 embed=discord.Embed(title=message.author.display_name,
