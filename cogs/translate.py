@@ -20,7 +20,6 @@ class Translate(commands.Cog):
     async def on_message(self, message):
 
         #take users information to display in embedded message
-        username = str(message.author).split('#')[0]
         user_message = str(message.content)
 
         #ignore commands
@@ -38,13 +37,13 @@ class Translate(commands.Cog):
             #embedded message with op name and avatar
             #--# TODO: Custom color based on Language? Channel?
             embed=discord.Embed(description=result)
+            #displays user avatar
             embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
             await message.channel.send(embed=embed)
 
 
     @commands.command()
     async def ping(self, ctx):
-        await self.client.change_presence(activity=discord.Game('Translating...'))
         await ctx.send('Pong!')
 
 async def setup(client):
