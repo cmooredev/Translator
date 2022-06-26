@@ -31,7 +31,7 @@ class Translate(commands.Cog):
                 embed=discord.Embed(title=message.author.display_name,
                 description=result, color=0xFF5733)
                 embed.set_thumbnail(url=message.author.avatar_url)
-                await message.channel.send(embed=embed)
+                await self.message.channel.send(embed=embed)
                 #delete previously sent message
                 if params["delete_source"] == "true":
                     await message.delete()
