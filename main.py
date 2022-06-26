@@ -25,7 +25,7 @@ async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
-            await client.channel.send(f'{filename[:-3]} loaded.')
+            await client.send(f'{filename[:-3]} loaded.')
 
 async def main():
     async with client:
