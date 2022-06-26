@@ -23,6 +23,7 @@ async def reload(ctx, extension):
     await ctx.send(f'{filename[:-3]} loaded.')
 
 @client.command()
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
 

@@ -31,15 +31,16 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
-        translator = deepl.Translator(DEEPL_AUTH)
-        #translate message into target language
-        result = translator.translate_text(user_message, target_lang='EN-US')
-        #embedded message with op name and avatar
-        #--# TODO: Custom color based on Language? Channel?
+        if "Translate" in str(message.author.roles):
+            translator = deepl.Translator(DEEPL_AUTH)
+            #translate message into target language
+            result = translator.translate_text(user_message, target_lang='EN-US')
+            #embedded message with op name and avatar
+            #--# TODO: Custom color based on Language? Channel?
 
-        #send embedded message
+            #send embedded message
 
-        await message.channel.send(result)
+            await message.channel.send(result)
 
     @commands.command()
     async def ping(self, ctx):
