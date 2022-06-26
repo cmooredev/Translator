@@ -22,7 +22,7 @@ async def reload(ctx, extension):
     await client.load_extension(f'cogs.{extension}')
     await ctx.send(f'{filename[:-3]} loaded.')
 
-async def load(ctx):
+async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
