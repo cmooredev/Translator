@@ -18,7 +18,7 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        await message.channel.send(message.author.mention)
+        
 
     @commands.command()
     async def ping(self, ctx):
