@@ -31,7 +31,7 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
-        if "Translate" in str(message.author.roles):
+        if 'Translate' in str(message.author.roles):
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
             result = translator.translate_text(user_message, target_lang='EN-US')
