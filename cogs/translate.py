@@ -18,18 +18,24 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+
+        #take users information to display in embedded message
         username = str(message.author).split('#')[0]
         user_message = str(message.content)
 
+        #prevent bot from replying to self
         if message.author == self.client.user:
             return
 
         translator = deepl.Translator(DEEPL_AUTH)
-        await message.channel.send("Test")
+        #translate message into target language
         result = translator.translate_text(user_message, target_lang='EN-US')
-
-        await message.channel.send(result)
-        await message.channel.send(message.author.mention)
+        #embedded message with op name and avatar
+        #--# TODO: Custom color based on Language? Channel?
+        embed=discord.Embed(title=message.author.display_name, description=result, color=0xFF5733)
+        embed.set_thumbnail(url=message.author.avatar_url)
+        #send embedded message
+        await message.channel.send(embed=embed)
 
     @commands.command()
     async def ping(self, ctx):
