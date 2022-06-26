@@ -21,11 +21,12 @@ async def reload(ctx, extension):
     await client.unload_extension(f'cogs.{extension}')
     await client.load_extension(f'cogs.{extension}')
 
-async def load():
+async def load(ctx):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
-            await client.send_message(f'{filename[:-3]} loaded.')
+            channel = client.get_channel(CHANNEL_ID)
+            await ctx.send(f'{filename[:-3]} loaded.')
 
 async def main():
     async with client:
