@@ -24,9 +24,9 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
-        await message.channel.send("Test")
         translator = deepl.Translator(DEEPL_AUTH)
         result = translator.translate_text(user_message, target_lang='EN-US')
+        await message.channel.send("Test")
         await message.channel.send(result)
         await message.channel.send(message.author.mention)
 
