@@ -36,6 +36,7 @@ class Translate(commands.Cog):
         embed.set_thumbnail(url=message.author.avatar_url)
         #send embedded message
         await message.channel.send(embed=embed)
+        await message.channel.send(result)
 
     @commands.command()
     async def ping(self, ctx):
