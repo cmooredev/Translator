@@ -18,8 +18,18 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        username = str(message.author).split('#')[0]
+        user_message = str(message.content)
+
         if message.author == self.client.user:
             return
+
+        translator = deepl.Translator(DEEPL_AUTH)
+        result = translator.translate_text(user_message, target_lang='EN-US')
+        embed=discord.Embed(title=message.author.display_name,
+        description=result, color=0xFF5733)
+        embed.set_thumbnail(url=message.author.avatar_url)
+        await self.message.channel.send(embed=embed)
         await message.channel.send(message.author.mention)
 
     @commands.command()
@@ -29,3 +39,6 @@ class Translate(commands.Cog):
 
 async def setup(client):
     await client.add_cog(Translate(client))
+
+    if message.author == self.client.user:
+        return
