@@ -22,9 +22,9 @@ class Translate(commands.Cog):
         user_message = str(message.content)
 
         if message.author == self.client.user:
-            
             return
 
+        await message.channel.send("Test")
         translator = deepl.Translator(DEEPL_AUTH)
         result = translator.translate_text(user_message, target_lang='EN-US')
         await message.channel.send(result)
