@@ -24,7 +24,7 @@ async def reload(ctx, extension):
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount=5):
+async def clear(ctx, amount=25):
     await ctx.channel.purge(limit=amount)
 
 async def load():
