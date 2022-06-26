@@ -22,6 +22,10 @@ async def reload(ctx, extension):
     await client.load_extension(f'cogs.{extension}')
     await ctx.send(f'{filename[:-3]} loaded.')
 
+@client.command()
+async def clear(ctx, amount=5):
+    await ctx.channel.purge(limit=amount)
+
 async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
