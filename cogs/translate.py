@@ -38,7 +38,7 @@ class Translate(commands.Cog):
             #embedded message with op name and avatar
             #--# TODO: Custom color based on Language? Channel?
             embed=discord.Embed(description=result)
-            embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
+            embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
             await message.channel.send(embed=embed)
 
 
