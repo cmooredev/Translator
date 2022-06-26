@@ -34,7 +34,7 @@ class Translate(commands.Cog):
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
             result = translator.translate_text(user_message, target_lang='EN-US')
-            if result.detected_source_lang != 'EN':
+            if result.detected_source_lang != 'EN' and result.detected_source_lang != 'EN-US' :
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
                 embed=discord.Embed(description=result)
