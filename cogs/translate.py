@@ -23,6 +23,10 @@ class Translate(commands.Cog):
         username = str(message.author).split('#')[0]
         user_message = str(message.content)
 
+        #ignore commands
+        if user_message[0] == '.':
+            return
+
         #prevent bot from replying to self
         if message.author == self.client.user:
             return
@@ -34,7 +38,7 @@ class Translate(commands.Cog):
         #--# TODO: Custom color based on Language? Channel?
 
         #send embedded message
-        
+
         await message.channel.send(result)
 
     @commands.command()
