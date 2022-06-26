@@ -25,8 +25,9 @@ class Translate(commands.Cog):
             return
 
         translator = deepl.Translator(DEEPL_AUTH)
-        result = translator.translate_text(user_message, target_lang='EN-US')
         await message.channel.send("Test")
+        result = translator.translate_text(user_message, target_lang='EN-US')
+
         await message.channel.send(result)
         await message.channel.send(message.author.mention)
 
