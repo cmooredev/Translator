@@ -26,10 +26,7 @@ class Translate(commands.Cog):
 
         translator = deepl.Translator(DEEPL_AUTH)
         result = translator.translate_text(user_message, target_lang='EN-US')
-        embed=discord.Embed(title=message.author.display_name,
-        description=result, color=0xFF5733)
-        embed.set_thumbnail(url=message.author.avatar_url)
-        await message.channel.send(embed=embed)
+        await message.channel.send(result)
         await message.channel.send(message.author.mention)
 
     @commands.command()
