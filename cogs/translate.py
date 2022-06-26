@@ -39,7 +39,7 @@ class Translate(commands.Cog):
             #--# TODO: Custom color based on Language? Channel?
             embed=discord.Embed(title=message.author.display_name, description=result)
             await message.channel.send(embed=embed)
-            await message.channel.send(message.author.avatar_url)
+            print(message.author.avatar_url)
 
     @commands.command()
     async def ping(self, ctx):
