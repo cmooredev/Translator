@@ -1,3 +1,4 @@
 deepl
 git+https://github.com/Rapptz/discord.py
 python-dotenv
+lingua-language-detector

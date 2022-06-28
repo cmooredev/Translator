@@ -3,6 +3,13 @@ import os
 import deepl
 from discord.ext import commands
 from dotenv import load_dotenv
+from lingua import Language, LanguageDetectorBuilder
+
+languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
+
+detector = LanguageDetectorBuilder.from_languages(*languages).build()
+
+
 
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
@@ -31,6 +38,8 @@ class Translate(commands.Cog):
             return
 
         if 'Translate' in str(message.author.roles):
+            lingua_result = detector.detect_language_of(user_message)
+            print(f'Lingua result {lingua_result}')
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
             result = translator.translate_text(user_message, target_lang='EN-US')
