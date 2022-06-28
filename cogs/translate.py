@@ -37,9 +37,8 @@ class Translate(commands.Cog):
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
-            print(lingua_result)
-            print(type(lingua_result))
-            if lingua_result != 'Language.ENGLISH':
+            print(lingua_result.name)
+            if lingua_result.name != 'ENGLISH':
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
                 result = translator.translate_text(user_message, target_lang='EN-US')
