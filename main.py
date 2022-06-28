@@ -10,8 +10,6 @@ TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.default()
 intents.message_content = True
 
-def get_prefix(client, message):
-
 client = commands.Bot(command_prefix = '.', intents=intents)
 
 @client.event
