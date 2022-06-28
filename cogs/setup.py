@@ -16,11 +16,6 @@ class SelectView(discord.ui.View):
         super().__init__(timeout=timeout)
         self.add_item(Select())
 
-@commands.command()
-async def config(self, ctx):
-    #send select menu to user
-    await ctx.send("Select what language you would like to translate text to:", view=Select())
-
 class Setup(commands.Cog):
 
     def __init__(self, client):
@@ -31,6 +26,11 @@ class Setup(commands.Cog):
         #need to implement setup that lets users configure target lang
         #select = Select()
         print('SetupCog loaded')
+
+    @commands.command()
+    async def config(self, ctx):
+    #send select menu to user
+    await ctx.send("Select what language you would like to translate text to:", view=SelectView())
 
 async def setup(client):
     await client.add_cog(Setup(client))
