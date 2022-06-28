@@ -4,12 +4,15 @@ import deepl
 from discord.ext import commands
 from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
+import pymongo
 
 languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
 detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
+MONGO_URI = os.getenv('MONGO_URI')
+mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 class Translate(commands.Cog):
 

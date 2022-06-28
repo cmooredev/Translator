@@ -1,7 +1,14 @@
 import discord
 from discord.ext import commands
+import pymongo
+from dotenv import load_dotenv
 
-class Select(discord.ui.Select):
+load_dotenv()
+MONGO_URI = os.getenv('MONGO_URI')
+mongodb_client = pymongo.MongoClient(MONGO_URI)
+
+#select menu for choosing a target language
+class SelectLanguage(discord.ui.Select):
     def __init__(self):
         options=[
             discord.SelectOption(label="English", emoji="🇺🇸", description="English"),
@@ -14,7 +21,7 @@ class Select(discord.ui.Select):
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 100):
         super().__init__(timeout=timeout)
-        self.add_item(Select())
+        self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
 
