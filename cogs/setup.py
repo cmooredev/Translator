@@ -10,6 +10,8 @@ class Setup(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        #need to implement setup that lets users configure target lang
+        #select = Select()
         print('SetupCog loaded')
 
 async def setup(client):
