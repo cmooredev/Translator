@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
-MONGO_PASS = os.getenv('MONGO_PASS')
+MONGO_URI = os.getenv('MONGO_URI')
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -16,8 +16,7 @@ intents.message_content = True
 client = commands.Bot(command_prefix = '.', intents=intents)
 
 #start mongodb client
-mongodb_client = pymongo.MongoClient(f'mongodb+srv://user:{MONGO_PASS}'\
-    '@translator-config.s22p0.mongodb.net/?retryWrites=true&w=majority')
+mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 @client.event
 async def on_ready():
