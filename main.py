@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import pymongo
+import os
 from discord.ext import commands
 from dotenv import load_dotenv
 
