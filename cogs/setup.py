@@ -22,7 +22,7 @@ class SelectLanguage(discord.ui.Select):
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
         specs = {"target_lang" : self.values[0]}
-        result = col.update_one(specs)
+        result = col.replace_one(specs)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
 class SelectView(discord.ui.View):
