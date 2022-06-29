@@ -22,7 +22,7 @@ class SelectLanguage(discord.ui.Select):
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
         specs = {"target_lang" : self.values[0]}
-        result = col.insert_one(specs)
+        result = col.update_one(specs)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
 class SelectView(discord.ui.View):
@@ -39,6 +39,7 @@ class Setup(commands.Cog):
     async def on_ready(self):
         #need to implement setup that lets users configure target lang
         #select = Select()
+
         print('SetupCog loaded')
 
     @commands.command()
