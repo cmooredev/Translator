@@ -31,7 +31,7 @@ class SelectLanguage(discord.ui.Select):
             'server_id' : server_id},
             {'$set': {specs}},
             return_document = ReturnDocument.AFTER,
-            upsert = True)
+            upsert = True
         )
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
