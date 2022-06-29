@@ -29,10 +29,9 @@ class SelectLanguage(discord.ui.Select):
         }
         result = col.find_one_and_update({
             'server_id' : server_id}, {
-            '$set': {specs}}, {
-            return_document = ReturnDocument.AFTER,
-            upsert = True
-            }
+            '$set': {specs}},
+            upsert = True,
+            return_document = ReturnDocument.AFTER
         )
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
