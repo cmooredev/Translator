@@ -21,8 +21,8 @@ class SelectLanguage(discord.ui.Select):
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
-        result = col.insert_one(str(self.values[0]))
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
+        result = col.insert_one(str(self.values[0]))
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 100):
