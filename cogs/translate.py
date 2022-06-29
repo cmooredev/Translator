@@ -14,6 +14,9 @@ DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
+db = mongodb_client["translatordb"]
+col = db["target_lang"]
+
 class Translate(commands.Cog):
 
     def __init__(self, client):
@@ -59,7 +62,8 @@ class Translate(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx):
-        await ctx.send('Pong!')
+        lang = col.find_one()
+        await ctx.send(f'Pong! {lang}')
 
 async def setup(client):
     await client.add_cog(Translate(client))

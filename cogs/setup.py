@@ -7,6 +7,8 @@ import os
 load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
+db = mongodb_client["translatordb"]
+col = db["target_lang"]
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
@@ -19,6 +21,7 @@ class SelectLanguage(discord.ui.Select):
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
+        col.insert_one(mydict)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
 class SelectView(discord.ui.View):
