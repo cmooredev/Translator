@@ -34,7 +34,7 @@ class Translate(commands.Cog):
             return
 
         #ignore urls
-        if user_message[:4] = 'http':
+        if user_message[:4] == 'http':
             return
 
         #prevent bot from replying to self
