@@ -21,8 +21,12 @@ class SelectLanguage(discord.ui.Select):
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
-        print(interaction.guild.id)
-        specs = {"target_lang" : self.values[0]}
+        #get server id to store specific target languages for multiple servers
+        server_id = interaction.guild.id)
+        specs = {
+            "server_id" : server_id,
+            "target_lang" : self.values[0],
+        }
         result = col.insert_one(specs)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
