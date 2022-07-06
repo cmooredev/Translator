@@ -33,7 +33,7 @@ class Translate(commands.Cog):
         user_message = str(message.content)
         server_key = {'server_id' : message.guild.id}
         server_lang = col.find_one(server_key)
-        print(server_lang['target_lang'])
+        print(server_lang[0])
 
         #ignore commands
         if user_message[0] == '.':
