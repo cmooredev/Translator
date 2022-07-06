@@ -52,21 +52,6 @@ class Setup(commands.Cog):
 
         #load initial settings here
         #########
-
-
-        server_id = self.guild.id
-        specs = {
-            "server_id" : server_id,
-            "counter" : 0,
-        }
-
-        server_key = {"server_id" : server_id}
-        #update server info
-        result = col.update_one(server_key, {'$set':specs}, True)
-
-
-
-
         print('SetupCog loaded')
 
     @commands.command()
