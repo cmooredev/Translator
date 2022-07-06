@@ -23,7 +23,7 @@ class SelectLanguage(discord.ui.Select):
     async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
         server_id = interaction.guild.id
-        specs = {"server_id" : server_id, "target_lang" : self.values[0]}
+        specs = {"target_lang" : self.values[0]}
 
         result = insert_one(specs)
 
