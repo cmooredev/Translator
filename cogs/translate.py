@@ -66,6 +66,7 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             len_chars = count(user_message)
+            print(f'length {len_chars}')
 
             if lingua_lang.lower() != server_lang.lower():
 
@@ -74,14 +75,14 @@ class Translate(commands.Cog):
                 if counter_exits == None:
                     print('NO COUNTER')
                     specs = {
-                        "counter" : int(len_chars),
+                        "counter" : 1,
                     }
                     #add counter if it doesnt exist
                     result = col.update_one(server_key, {'$set':specs}, True)
                 else:
                     print('UPDATED COUNTER')
                     #increment counter
-                    result = col.update_one(server_key, {'$inc': {'counter': int(len_chars)}})
+                    result = col.update_one(server_key, {'$inc': {'counter': int(1)}})
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
