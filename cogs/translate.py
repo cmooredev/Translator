@@ -87,10 +87,9 @@ class Translate(commands.Cog):
                 #translate message into target language
                 result = translator.translate_text(user_message, target_lang=languages[server_lang])
                 #if translation results in same message
-                print(f'user_message:{user_message}')
-                print(f'result:{result}')
                 if str(user_message) == str(result):
-                    print("equal")
+                    print("No translation found.")
+                    return
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
                 embed=discord.Embed(description=result)
