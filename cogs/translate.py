@@ -89,6 +89,8 @@ class Translate(commands.Cog):
                 #if translation results in same message
                 print(f'user_message:{user_message}')
                 print(f'result:{result}')
+                if user_message == result:
+                    print("equal")
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
                 embed=discord.Embed(description=result)
