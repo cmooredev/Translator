@@ -62,7 +62,7 @@ class Translate(commands.Cog):
             if lingua_lang.lower() != server_lang.lower():
 
                 #check for counter and increment
-                inc_counter(lang, col)
+                inc_counter(lang)
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
@@ -82,7 +82,7 @@ class Translate(commands.Cog):
         result = lang['target_lang']
         await ctx.send(f'Current target language: {result}')
 
-def inc_counter(lang, col):
+def inc_counter(lang):
     counter_exits = lang.get('counter')
     if counter_exits == None:
         print('NO COUNTER')
