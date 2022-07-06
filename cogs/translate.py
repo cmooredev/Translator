@@ -52,8 +52,8 @@ class Translate(commands.Cog):
 
         server_key = {'server_id': message.guild.id}
         lang = col.find_one(server_key)
-        result = lang['target_lang']
-        print(languages[result])
+        server_lang = lang['target_lang']
+        print(languages[server_lang])
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
@@ -61,7 +61,7 @@ class Translate(commands.Cog):
             if lingua_result.name != 'ENGLISH':
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
-                result = translator.translate_text(user_message, target_lang='EN-US')
+                result = translator.translate_text(user_message, target_lang=languages[server_lang])
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
                 embed=discord.Embed(description=result)
