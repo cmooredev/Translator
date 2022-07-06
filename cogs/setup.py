@@ -29,6 +29,7 @@ class SelectLanguage(discord.ui.Select):
         }
 
         server_key = {"server_id" : server_id}
+        #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
 
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
@@ -47,6 +48,24 @@ class Setup(commands.Cog):
     async def on_ready(self):
         #need to implement setup that lets users configure target lang
         #select = Select()
+
+
+        #load initial settings here
+        #########
+
+
+        server_id = self.guild.id
+        specs = {
+            "server_id" : server_id,
+            "counter" : 0,
+        }
+
+        server_key = {"server_id" : server_id}
+        #update server info
+        result = col.update_one(server_key, {'$set':specs}, True)
+
+
+
 
         print('SetupCog loaded')
 
