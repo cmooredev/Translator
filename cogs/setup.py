@@ -14,9 +14,9 @@ col = db["server_lang"]
 class SelectLanguage(discord.ui.Select):
     def __init__(self):
         options=[
-            discord.SelectOption(label="English", emoji="🇺🇸", description="English"),
-            discord.SelectOption(label="Spanish", emoji="🇪🇸", description="Spanish"),
-            discord.SelectOption(label="French", emoji="🇫🇷", description="French")
+            discord.SelectOption(label="english", emoji="🇺🇸", description="english"),
+            discord.SelectOption(label="spanish", emoji="🇪🇸", description="spanish"),
+            discord.SelectOption(label="french", emoji="🇫🇷", description="french")
         ]
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)

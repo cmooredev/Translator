@@ -18,9 +18,9 @@ db = mongodb_client["translatordb"]
 col = db["server_lang"]
 
 languages = {
-    'French':'FR',
-    'English':'EN-US',
-    'Spanish':'ES',
+    'french':'FR',
+    'english':'EN-US',
+    'spanish':'ES',
 }
 
 class Translate(commands.Cog):
@@ -52,13 +52,14 @@ class Translate(commands.Cog):
 
         server_key = {'server_id': message.guild.id}
         lang = col.find_one(server_key)
-        server_lang = lang['target_lang']
+        server_lang = lower(lang['target_lang'])
         print(languages[server_lang])
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
-            print(lingua_result.name)
-            if lower(lingua_result.name) != lower(server_lang):
+            lingua_lang = lower(lingua_result.name)
+            print(lingua_lang)
+            if lingua_lang != server_lang:
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
                 result = translator.translate_text(user_message, target_lang=languages[server_lang])
