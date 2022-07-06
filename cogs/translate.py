@@ -45,6 +45,9 @@ class Translate(commands.Cog):
         #ignore emojis
         if user_message[0] == ':':
             return
+        #ignore emojis
+        if user_message[0] == '\':
+            return
 
         #ignore urls
         if user_message[:4] == 'http':
