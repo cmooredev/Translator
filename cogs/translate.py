@@ -73,7 +73,7 @@ class Translate(commands.Cog):
                 else:
                     print('UPDATED COUNTER')
                     #increment counter
-                    result = col.find_one_and_update(
+                    result = col.update_one(
                         {server_key,
                         {'$inc': {'counter': 1}}
                     })
