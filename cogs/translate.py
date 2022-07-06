@@ -65,6 +65,18 @@ class Translate(commands.Cog):
                 counter_exits = lang.get('counter')
                 if counter_exits == None:
                     print('NO COUNTER')
+                    specs = {
+                        "counter" : 1,
+                    }
+                    #add counter if it doesnt exist
+                    result = col.update_one(server_key, {'$set':specs}, True)
+                else:
+                    print('UPDATED COUNTER')
+                    #increment counter
+                    col.find_one_and_update(
+                        {server_key,
+                        {'$inc': {'counter': 1}}
+                    )
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
