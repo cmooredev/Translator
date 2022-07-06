@@ -8,7 +8,7 @@ load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
-col = db["target_lang"]
+col = db["server_lang"]
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
@@ -23,13 +23,8 @@ class SelectLanguage(discord.ui.Select):
     async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
         server_id = interaction.guild.id
-        specs = {
-            "server_id" : server_id,
-            "target_lang" : self.values[0],
-        }
+        specs = {"server_id" : server_id, "target_lang" : self.values[0]}
 
-
-        server_key = {"server_id" : server_id}
         result = insert_one(specs)
 
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
