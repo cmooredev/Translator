@@ -73,10 +73,7 @@ class Translate(commands.Cog):
                 else:
                     print('UPDATED COUNTER')
                     #increment counter
-                    result = col.update_one(
-                        {server_key,
-                        {'$inc': {'counter': int(1)}}
-                    })
+                    result = col.update_one(server_key, {'$inc': {'counter': int(1)}})
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
