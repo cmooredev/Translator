@@ -75,7 +75,7 @@ class Translate(commands.Cog):
                     #increment counter
                     result = col.update_one(
                         {server_key,
-                        {'$inc': {'counter': 1}}
+                        {'$inc': {'counter': int(1)}}
                     })
 
                 translator = deepl.Translator(DEEPL_AUTH)
