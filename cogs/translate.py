@@ -64,8 +64,9 @@ class Translate(commands.Cog):
             if lingua_lang.lower() != server_lang.lower():
 
                 #check for counter and increment
-                msgurl = lang.get('counter')
-                print(f'------------------------------->{msgurl}')
+                counter_exits = lang.get('counter')
+                if counter_exits == None:
+                    print('NO COUNTER')
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
