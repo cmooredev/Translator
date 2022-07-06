@@ -17,6 +17,12 @@ mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
 col = db["server_lang"]
 
+languages = {
+    'French':'FR',
+    'English':'EN-US',
+    'Spanish':'ES',
+}
+
 class Translate(commands.Cog):
 
     def __init__(self, client):
@@ -44,6 +50,10 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
+        server_key = {'server_id': message.guild.id}
+        lang = col.find_one(server_key)
+        result = lang['target_lang']
+        print(languages[result])
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable

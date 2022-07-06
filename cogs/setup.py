@@ -28,7 +28,6 @@ class SelectLanguage(discord.ui.Select):
             "target_lang" : self.values[0],
         }
 
-
         server_key = {"server_id" : server_id}
         result = col.replace_one(server_key, specs, True)
 
