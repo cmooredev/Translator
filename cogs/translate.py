@@ -31,9 +31,6 @@ class Translate(commands.Cog):
 
         #take users information to display in embedded message
         user_message = str(message.content)
-        server_key = {'server_id' : message.guild.id}
-        server_lang = col.find_one(server_key)
-        print(server_lang[0])
 
         #ignore commands
         if user_message[0] == '.':
