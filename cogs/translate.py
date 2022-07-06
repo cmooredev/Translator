@@ -63,6 +63,7 @@ class Translate(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         lang = col.find()
+        col.delete_many({})
         await ctx.send(f'Current target language: {lang[0]}')
 
 async def setup(client):
