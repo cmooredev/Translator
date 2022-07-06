@@ -31,6 +31,9 @@ class Translate(commands.Cog):
 
         #take users information to display in embedded message
         user_message = str(message.content)
+        server_key = {'server_id' : message.guild.id}
+        server_lang = col.find_one(server_key)
+        print(server_lang['target_lang'])
 
         #ignore commands
         if user_message[0] == '.':
@@ -63,7 +66,7 @@ class Translate(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         lang = col.find()
-        await ctx.send(f'Current target language: {lang[0]}')
+        await ctx.send(f'Current target language: {lang['target_lang']}')
 
 async def setup(client):
     await client.add_cog(Translate(client))
