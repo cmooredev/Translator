@@ -55,7 +55,6 @@ class Setup(commands.Cog):
         print('SetupCog loaded')
 
     @commands.command()
-    @has_permissions(administrator=True)
     async def config(self, ctx):
         #send select menu to user
         await ctx.send("Select what language you would like to translate text to:", view=SelectView())
