@@ -62,7 +62,8 @@ class Translate(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx):
-        lang = col.find_one()
+        server_key = {'server_id': ctx.guild.id}
+        lang = col.find_one(server_key)
         result = lang['target_lang']
         await ctx.send(f'Current target language: {result}')
 
