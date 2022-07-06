@@ -30,7 +30,7 @@ class SelectLanguage(discord.ui.Select):
 
 
         server_key = {"server_id" : server_id}
-        result = update_one(server_key, specs)
+        result = insert_one(server_key)
 
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
