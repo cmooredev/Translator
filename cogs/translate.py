@@ -53,12 +53,12 @@ class Translate(commands.Cog):
         server_key = {'server_id': message.guild.id}
         lang = col.find_one(server_key)
         server_lang = lang['target_lang']
-        print(server_lang)
+        print(languages[server_lang])
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
             print(lingua_result.name)
-            if lower(lingua_result.name) != lower(server_lang):
+            if lingua_result.name != server_lang:
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
                 result = translator.translate_text(user_message, target_lang=languages[server_lang])
