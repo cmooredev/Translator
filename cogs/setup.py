@@ -25,7 +25,7 @@ class SelectLanguage(discord.ui.Select):
         server_id = interaction.guild.id
         specs = {"target_lang" : self.values[0]}
 
-        result = insert_one(specs)
+        
 
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
