@@ -15,7 +15,7 @@ MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 db = mongodb_client["translatordb"]
-col = db["target_lang"]
+col = db["server_lang"]
 
 class Translate(commands.Cog):
 
@@ -63,7 +63,7 @@ class Translate(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         lang = col.find_one()
-        await ctx.send(f'Current target language: {lang[0]}')
+        await ctx.send(f'Current target language: {lang}')
 
 async def setup(client):
     await client.add_cog(Translate(client))
