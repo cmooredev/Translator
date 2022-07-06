@@ -76,7 +76,7 @@ class Translate(commands.Cog):
                     col.find_one_and_update(
                         {server_key,
                         {'$inc': {'counter': 1}}
-                    )
+                    })
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
