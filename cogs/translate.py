@@ -18,9 +18,9 @@ db = mongodb_client["translatordb"]
 col = db["server_lang"]
 
 languages = {
-    'French':'FR',
-    'English':'EN-US',
-    'Spanish':'ES',
+    'french':'FR',
+    'english':'EN-US',
+    'spanish':'ES',
 }
 
 class Translate(commands.Cog):
