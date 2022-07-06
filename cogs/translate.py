@@ -53,7 +53,7 @@ class Translate(commands.Cog):
         server_key = {'server_id': message.guild.id}
         lang = col.find_one(server_key)
         server_lang = lang['target_lang']
-        print(languages[server_lang])
+        print(server_lang)
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
