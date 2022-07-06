@@ -64,7 +64,7 @@ class Translate(commands.Cog):
             if lingua_lang.lower() != server_lang.lower():
 
                 #check for counter and increment
-                msgurl = record["entities"].get("urls")
+                msgurl = lang.get('counter')
                 print(f'------------------------------->{msgurl}')
 
                 translator = deepl.Translator(DEEPL_AUTH)
