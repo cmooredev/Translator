@@ -45,8 +45,8 @@ class Translate(commands.Cog):
         #ignore emojis
         if user_message[0] == ':':
             return
-        #ignore emojis
-        if user_message[0] == '\\':
+        #ignore custom emojis
+        if user_message[0] == '<':
             return
 
         #ignore urls
@@ -66,7 +66,6 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             len_chars = len(user_message)
-            print(user_message)
 
             if lingua_lang.lower() != server_lang.lower():
 
