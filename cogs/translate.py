@@ -36,6 +36,10 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        server_id = message.guild.id
+        #authenticate api key
+        if auth_apikey(server_id) == False:
+            return
 
         #take users information to display in embedded message
         user_message = str(message.content)
@@ -59,12 +63,9 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
-        server_key = {'server_id': message.guild.id}
+        server_key = {'server_id': server_id}
         lang = col.find_one(server_key)
         server_lang = lang['target_lang']
-
-        #authenticate api key
-        auth_apikey()
 
 
         if 'Translate' in str(message.author.roles):

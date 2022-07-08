@@ -10,8 +10,10 @@ class Authenticate(commands.Cog):
     async def on_ready(self):
         print('Authenticate loaded')
 
-def auth_apikey():
+def auth_apikey(server_id):
     print('authenticating....')
+    print(f'successful..... {server_id} has access')
+    return True
 
 async def setup(client):
     await client.add_cog(Authenticate(client))
