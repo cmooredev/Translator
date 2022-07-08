@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
 import pymongo
 
+from authenticate import auth_apikey
+
 languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
 detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
@@ -60,6 +62,10 @@ class Translate(commands.Cog):
         server_key = {'server_id': message.guild.id}
         lang = col.find_one(server_key)
         server_lang = lang['target_lang']
+
+        #authenticate api key
+        auth_apikey()
+
 
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
