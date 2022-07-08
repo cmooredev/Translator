@@ -26,7 +26,9 @@ def auth_apikey(server_id):
     print('authenticating....')
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
-    print(f'successful..... {server_access} has access')
+    print(server_id)
+    print(server_access)
+    print(f'........ has access')
     return True
 
 async def setup(client):
