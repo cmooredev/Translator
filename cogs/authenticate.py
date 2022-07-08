@@ -1,5 +1,16 @@
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+DEEPL_AUTH = os.getenv('DEEPL_AUTH')
+MONGO_URI = os.getenv('MONGO_URI')
+mongodb_client = pymongo.MongoClient(MONGO_URI)
+
+db = mongodb_client["translatordb"]
+col = db["api_keys"]
+
 
 class Authenticate(commands.Cog):
 
@@ -12,7 +23,9 @@ class Authenticate(commands.Cog):
 
 def auth_apikey(server_id):
     print('authenticating....')
-    print(f'successful..... {server_id} has access')
+    server_key = {'server_id': server_id}
+    server_access = col.find_one(server_key)
+    print(f'successful..... {server_access} has access')
     return True
 
 async def setup(client):
