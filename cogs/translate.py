@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
 import pymongo
 
-from authenticate import auth_apikey
+from .authenticate import auth_apikey
 
 languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
 detector = LanguageDetectorBuilder.from_languages(*languages).build()
