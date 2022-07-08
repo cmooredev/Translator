@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
+import pymongo
 
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
