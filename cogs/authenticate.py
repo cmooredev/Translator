@@ -26,10 +26,13 @@ def auth_apikey(server_id):
     print(f'authenticating....{server_id}')
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
-    print(server_id)
-    print(server_access)
-    print(f'........ has access')
-    return True
+    if server_access != None:
+        return True
+        print(f'{server_key}...... has access')
+    else:
+        print('access denied')
+        return False
+
 
 async def setup(client):
     await client.add_cog(Authenticate(client))
