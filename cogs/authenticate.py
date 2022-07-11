@@ -23,7 +23,7 @@ class Authenticate(commands.Cog):
         print('Authenticate loaded')
 
 def auth_apikey(server_id):
-    print('authenticating....')
+    print(f'authenticating....{server_id}')
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
     print(server_id)
