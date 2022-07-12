@@ -19,6 +19,7 @@ DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
 GOOGLE_STRING = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 GOOGLE_AUTH = json.loads(GOOGLE_STRING)
+GOOGLE_AUTH = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
 
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
