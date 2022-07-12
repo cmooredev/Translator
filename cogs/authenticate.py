@@ -29,7 +29,7 @@ def auth_apikey(server_id):
     server_access = col.find_one(server_key)
     reg_date = server_access['registration_date']
     print(reg_date)
-    days_to_expired = datetime.now() - reg_date
+    days_to_expired = (datetime.now() - reg_date).TotalDays
     if days_to_expired > 0:
         print('not expired')
 
