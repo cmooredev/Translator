@@ -7,4 +7,3 @@ pymongo[srv]
 dnspython==2.2.0
 google-cloud-translate==2.0.1
 google-auth==1.35.0
-google-cloud-storage==2.0.0
