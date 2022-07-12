@@ -151,7 +151,7 @@ class Translate(commands.Cog):
         result = lang['target_lang']
         server_credits = sub_col.find_one(server_key)
         current_credits = server_credits['credits']
-        await ctx.send(f'Current target language: {result} Credits: {current_credits}')
+        await ctx.send(f'Current target language: {result.upper()} Credits: {current_credits}')
 
 async def setup(client):
     await client.add_cog(Translate(client))
