@@ -124,13 +124,11 @@ class Translate(commands.Cog):
                 if server_lang == 'english':
                     google_target_lang = 'en'
 
-                print('UPDATED GOOGLE COUNTER')
                 credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
                 google_detected_lang = result['detectedSourceLanguage']
-                print(result)
-                google_result = str(result['translatedText'])
+
                 #if google doesnt find a translation, return
                 if str(user_message) == google_result:
                     print(f"No translation found. ---- {result}")
@@ -145,8 +143,6 @@ class Translate(commands.Cog):
 
             if lingua_lang.lower() != server_lang.lower():
 
-                #server credits
-                print('UPDATED COUNTER')
                 #increment counter
                 credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
 
