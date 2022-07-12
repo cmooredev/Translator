@@ -120,8 +120,10 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             print(lingua_lang)
-            if lingua_lang.lower() in deepl_languages:
-                print('Supported by deepl.')
+            if lingua_lang.lower() not in deepl_languages:
+                print('Language not supported by deepl.')
+                #enter code for google translate
+                return
             len_chars = len(user_message)
 
             if lingua_lang.lower() != server_lang.lower():
