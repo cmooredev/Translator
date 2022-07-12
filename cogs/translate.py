@@ -120,11 +120,11 @@ class Translate(commands.Cog):
             print(lingua_lang)
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
-                google_target_lang = (basic_languages[server_lang]).lower
+                google_target_lang = basic_languages[server_lang]
                 print(f'Language not supported by deepl. {google_target_lang}')
 
                 #enter code for google translate
-                result = gtranslate_client.translate(user_message, target_language=google_target_lang)
+                result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
                 print(result)
                 return
 
