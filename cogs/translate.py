@@ -10,16 +10,23 @@ from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
+from .languages import lingua_languages
 
-languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
-detector = LanguageDetectorBuilder.from_languages(*languages).build()
+
+detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
 
 load_dotenv()
+#deepl credentials
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
+
+#mongodb credentials
 MONGO_URI = os.getenv('MONGO_URI')
+
+#google translate credentials
 GOOGLE_AUTH = json.loads(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
 GOOGLE_AUTH['private_key'] = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
 CREDENTIALS = service_account.Credentials.from_service_account_info(GOOGLE_AUTH)
+gtranslate_client = translate.Client(credentials=CREDENTIALS)
 
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
@@ -41,7 +48,7 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        gtranslate_client = translate.Client(credentials=CREDENTIALS)
+
         print(gtranslate_client.translate('hola mis amigos', target_language='en'))
 
         print('TranslatorCog loaded')
