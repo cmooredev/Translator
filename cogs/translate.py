@@ -39,6 +39,7 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        od.environ['GOOGLE_APPLICATION_CREDENTIALS'] = rf'{GOOGLE_AUTH}'
         gtranslate_client = translate.Client()
         print(f'GOOGLE AUTH-{gtranslate_client}')
         print('TranslatorCog loaded')
