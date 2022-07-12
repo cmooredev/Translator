@@ -43,9 +43,7 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print(GOOGLE_AUTH)
-
-
-        gtranslate_client = translate.Client()
+        gtranslate_client = translate.Client(credentials=CREDENTIALS)
         print(f'GOOGLE AUTH-{gtranslate_client}')
         print('TranslatorCog loaded')
 
