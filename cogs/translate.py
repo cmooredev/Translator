@@ -14,7 +14,7 @@ from .authenticate import auth_apikey
 lingua_languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
     Language.CHINESE, Language.DUTCH, Language.HINDI,
     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN
-    , Language.TAGALOG, Language.TURKISH]
+    , Language.TAGALOG, Language.TURKISH, Language.INDONESIAN]
 detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
 
 load_dotenv()
@@ -63,6 +63,7 @@ basic_languages = {
     'turkish': 'TR',
     'swedish': 'SV',
     'chinese': 'ZH',
+    'indonesian': 'IN',
 }
 
 class Translate(commands.Cog):

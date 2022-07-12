@@ -26,10 +26,14 @@ class SelectLanguage(discord.ui.Select):
             discord.SelectOption(label="finnish", emoji="🇫🇮", description="finnish"),
             discord.SelectOption(label="hungarian", emoji="🇭🇺", description="hungarian"),
             discord.SelectOption(label="indonesian", emoji="🇮🇩", description="indonesian"),
+            discord.SelectOption(label="italian", emoji="🇮🇹", description="italian"),
+            discord.SelectOption(label="japanese", emoji="🇯🇵", description="japanese"),
+
         ]
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
+        await interaction.delete_original_message()
         #get server id to store specific target languages for multiple servers
         server_id = interaction.guild.id
         specs = {
