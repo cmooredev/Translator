@@ -12,9 +12,9 @@ from google.oauth2 import service_account
 from .authenticate import auth_apikey
 
 lingua_languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
-    Language.CHINESE, Language.DUTCH, Language.HINDI, Language.INDONESIAN,
+    Language.CHINESE, Language.DUTCH, Language.HINDI,
     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN
-    , Language.TAGALOG, Language.TURKISH, Language.HINDI]
+    , Language.TAGALOG, Language.TURKISH]
 detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
 
 load_dotenv()
@@ -120,7 +120,7 @@ class Translate(commands.Cog):
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = basic_languages[server_lang]
-                print('UPDATED COUNTER')
+                print('UPDATED GOOGLE COUNTER')
                 credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
