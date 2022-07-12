@@ -15,6 +15,8 @@ detector = LanguageDetectorBuilder.from_languages(*languages).build()
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
+GOOGLE_AUTH = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 db = mongodb_client["translatordb"]
@@ -36,6 +38,7 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print('TranslatorCog loaded')
+        print(f'GOOGLE AUTH-{GOOGLE_AUTH}')
 
     @commands.Cog.listener()
     async def on_message(self, message):
