@@ -37,7 +37,7 @@ col = db["server_lang"]
 
 sub_col = db["api_keys"]
 
-deepl_languages = {
+basic_languages = {
     'french':'FR',
     'english':'EN-US',
     'spanish':'ES',
@@ -73,8 +73,6 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-
-        print(gtranslate_client.translate('hola mis amigos', target_language='en'))
 
         print('TranslatorCog loaded')
 
@@ -120,11 +118,16 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             print(lingua_lang)
-            if lingua_lang.lower() not in deepl_languages:
-                print('Language not supported by deepl.')
-                #enter code for google translate
-                return
             len_chars = len(user_message)
+            if lingua_lang.lower() not in basic_languages:
+                google_target_lang = (basic_languages[server_lang]).lower
+                print('Language not supported by deepl.')
+                
+                #enter code for google translate
+                result = gtranslate_client.translate(user_message, target_language=google_target_lang)
+                print(result)
+                return
+
 
             if lingua_lang.lower() != server_lang.lower():
 
