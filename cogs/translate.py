@@ -5,6 +5,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
 import pymongo
+from google.cloud import translate_v2 as translate
 
 from .authenticate import auth_apikey
 
@@ -57,7 +58,7 @@ class Translate(commands.Cog):
         #ignore emojis
         if user_message[0] == ':':
             return
-            
+
         #ignore custom emojis
         if user_message[0] == '<':
             return
