@@ -120,6 +120,8 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             print(lingua_lang)
+            if lingua_lang in deepl_languages:
+                print('Supported by deepl.')
             len_chars = len(user_message)
 
             if lingua_lang.lower() != server_lang.lower():
