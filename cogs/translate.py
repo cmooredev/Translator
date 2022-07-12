@@ -19,6 +19,8 @@ mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
 col = db["server_lang"]
 
+sub_col = db["api_keys"]
+
 languages = {
     'french':'FR',
     'english':'EN-US',
@@ -65,6 +67,8 @@ class Translate(commands.Cog):
 
         server_key = {'server_id': server_id}
         lang = col.find_one(server_key)
+        server_sub = sub_col.find_one(server_key)
+        server_credits = server_sub['credits']
         server_lang = lang['target_lang']
 
 
@@ -76,19 +80,10 @@ class Translate(commands.Cog):
 
             if lingua_lang.lower() != server_lang.lower():
 
-                #check for counter and increment
-                counter_exits = lang.get('counter')
-                if counter_exits == None:
-                    print('NO COUNTER')
-                    specs = {
-                        "counter" : len_chars,
-                    }
-                    #add counter if it doesnt exist
-                    result = col.update_one(server_key, {'$set':specs}, True)
-                else:
-                    print('UPDATED COUNTER')
-                    #increment counter
-                    result = col.update_one(server_key, {'$inc': {'counter': len_chars}})
+                #server credits
+                print('UPDATED COUNTER')
+                #increment counter
+                result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
