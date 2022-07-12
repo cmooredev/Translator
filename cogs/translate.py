@@ -122,7 +122,7 @@ class Translate(commands.Cog):
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = (basic_languages[server_lang]).lower
                 print('Language not supported by deepl.')
-                
+
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang)
                 print(result)
@@ -138,7 +138,7 @@ class Translate(commands.Cog):
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
-                result = translator.translate_text(user_message, target_lang=deepl_languages[server_lang])
+                result = translator.translate_text(user_message, target_lang=basic_languages[server_lang])
                 #if translation results in same message
                 if str(user_message) == str(result):
                     print(f"No translation found. ---- {result}")
