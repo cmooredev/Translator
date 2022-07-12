@@ -125,7 +125,7 @@ class Translate(commands.Cog):
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
                 google_detected_lang = result['detectedSourceLanguage']
-                print(f'{google_detected_lang}')
+                print(result)
                 google_result = str(result['translatedText'])
                 #refactor this into a function
                 embed=discord.Embed(description=google_result)
