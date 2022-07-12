@@ -40,8 +40,8 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print('TranslatorCog loaded')
-        project_id = GOOGLE_AUTH["project_id"]
-        print(f'GOOGLE AUTH-{project_id} type: {type(GOOGLE_AUTH)}')
+        gtranslate_client = translate.Client.from_service_account_json(GOOGLE_AUTH)
+        print(f'GOOGLE AUTH-{gtranslate_client}')
 
     @commands.Cog.listener()
     async def on_message(self, message):
