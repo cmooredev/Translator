@@ -44,7 +44,7 @@ class Translate(commands.Cog):
     async def on_ready(self):
         gtranslate_client = translate.Client(credentials=CREDENTIALS)
         print(gtranslate_client)
-        test_result = gtranslate_client.translate('hey i just want to test you', target_lang='en')
+        test_result = gtranslate_client.translate('donde esta mis amigos?', target_lang='en')
         print(f'TEST-{test_result}')
         print('TranslatorCog loaded')
 
