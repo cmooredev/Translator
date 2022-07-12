@@ -13,8 +13,8 @@ from .authenticate import auth_apikey
 
 languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
     Language.CHINESE, Language.DUTCH, Language.HINDI, Language.INDONESIAN,
-    Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN,
-    Language.SWEDISH, Language.TAGALOG, Language.TURKISH]
+    Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN
+    , Language.TAGALOG, Language.TURKISH]
 detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
 load_dotenv()
