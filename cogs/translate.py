@@ -76,6 +76,7 @@ class Translate(commands.Cog):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
+            print(lingua_lang)
             len_chars = len(user_message)
 
             if lingua_lang.lower() != server_lang.lower():
