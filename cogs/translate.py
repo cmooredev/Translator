@@ -90,7 +90,7 @@ class Translate(commands.Cog):
                 result = translator.translate_text(user_message, target_lang=languages[server_lang])
                 #if translation results in same message
                 if str(user_message) == str(result):
-                    print("No translation found.")
+                    print(f"No translation found. ---- {result}")
                     return
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
@@ -101,7 +101,7 @@ class Translate(commands.Cog):
 
 
     @commands.command()
-    async def ping(self, ctx):
+    async def trstats(self, ctx):
         server_key = {'server_id': ctx.guild.id}
         lang = col.find_one(server_key)
         result = lang['target_lang']
