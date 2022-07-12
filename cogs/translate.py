@@ -1,6 +1,7 @@
 import discord
 import os
 import deepl
+import json
 from discord.ext import commands
 from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
@@ -15,7 +16,8 @@ detector = LanguageDetectorBuilder.from_languages(*languages).build()
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
-GOOGLE_AUTH = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+GOOGLE_STRING = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+GOOGLE_AUTH = json.loads(GOOGLE_STRING)
 
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
