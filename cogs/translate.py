@@ -11,11 +11,11 @@ from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
 
-languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
+lingua_languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
     Language.CHINESE, Language.DUTCH, Language.HINDI, Language.INDONESIAN,
     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN
     , Language.TAGALOG, Language.TURKISH]
-detector = LanguageDetectorBuilder.from_languages(*languages).build()
+detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
 
 load_dotenv()
 #deepl credentials
@@ -37,10 +37,33 @@ col = db["server_lang"]
 
 sub_col = db["api_keys"]
 
-languages = {
+deepl_languages = {
     'french':'FR',
     'english':'EN-US',
     'spanish':'ES',
+    'bulgarian': 'BG',
+    'czech': 'CZ',
+    'danish': 'DA',
+    'german': 'DE',
+    'greek': 'EL',
+    'estonian': 'ET',
+    'finnish': 'FT',
+    'hungarian': 'HU',
+    'indonesian': 'ID',
+    'italian': 'IT',
+    'japanese': 'JA',
+    'lithuanian': 'LT',
+    'latvian': 'LV',
+    'dutch': 'NL',
+    'polish': 'PL',
+    'portuguese': 'PT-PT',
+    'romanian': 'RO',
+    'russian': 'RU',
+    'slovak': 'SK',
+    'slovenian': 'SL',
+    'turkish': 'TR',
+    'swedish': 'SV',
+    'chinese': 'ZH',
 }
 
 class Translate(commands.Cog):
@@ -108,7 +131,7 @@ class Translate(commands.Cog):
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
-                result = translator.translate_text(user_message, target_lang=languages[server_lang])
+                result = translator.translate_text(user_message, target_lang=deepl_languages[server_lang])
                 #if translation results in same message
                 if str(user_message) == str(result):
                     print(f"No translation found. ---- {result}")
