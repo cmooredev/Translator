@@ -11,7 +11,12 @@ from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
 
-detector = LanguageDetectorBuilder.from_all_spoken_languages().build()
+languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
+    Language.CHINESE, Language.DUTCH, Language.HINDI, Language.INDONESIAN,
+    Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN,
+    Language.PORTUGUESE, Language.SWEDISH, Language.TAGALOG, Language.TURKISH,
+    Language.VIETNAMESE]
+detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
 load_dotenv()
 #deepl credentials
