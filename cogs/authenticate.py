@@ -24,23 +24,26 @@ class Authenticate(commands.Cog):
 
 def auth_apikey(server_id):
     print(f'authenticating....')
-    #get server key and check registration date against current date
+    #get server and check if there is valid key
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
 
+    if server_access is None:
+        print('No server found.')
+        return False
+
+    #get registration date and check if expired
     reg_date = server_access['registration_date']
     to_expired = datetime.now() - reg_date
-    credits = server_access['credits']
-    print(f'========== {server_id} ==========')
-    print(f'{30 - to_expired.days} days left until expired')
-    print(f'{credits} are left for the month.')
 
     if to_expired.days < 0:
         print('Expired key...')
         return False
-    if server_access is None:
-        print('No server found.')
-        return False
+
+    credits = server_access['credits']
+    print(f'========== {server_id} ==========')
+    print(f'{30 - to_expired.days} days left until expired')
+    print(f'{credits} are left for the month.')
 
     return True
 
