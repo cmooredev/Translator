@@ -43,7 +43,7 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         gtranslate_client = translate.Client(credentials=CREDENTIALS)
-        print(gtranslate_client[0])
+        print(gtranslate_client)
         test_result = gtranslate_client.translate('donde esta mis amigos?', target_lang='en')
         print(f'TEST-{test_result}')
         print('TranslatorCog loaded')
@@ -119,7 +119,9 @@ class Translate(commands.Cog):
         server_key = {'server_id': ctx.guild.id}
         lang = col.find_one(server_key)
         result = lang['target_lang']
-        await ctx.send(f'Current target language: {result}')
+        server_credits = sub_col.find_one(server_key)
+        current_credits = server_credits['credits']
+        await ctx.send(f'Current target language: {result} Credits: {current_credits}')
 
 async def setup(client):
     await client.add_cog(Translate(client))
