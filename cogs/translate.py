@@ -19,7 +19,6 @@ DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
 GOOGLE_AUTH = json.loads(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
 GOOGLE_AUTH['private_key'] = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
-GOOGLE_PROJECT_ID = GOOGLE_AUTH['project_id']
 CREDENTIALS = service_account.Credentials.from_service_account_info(GOOGLE_AUTH)
 
 mongodb_client = pymongo.MongoClient(MONGO_URI)
@@ -43,9 +42,8 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         gtranslate_client = translate.Client(credentials=CREDENTIALS)
-        print(gtranslate_client)
-        test_result = gtranslate_client.translate('donde esta mis amigos?', target_lang='en')
-        print(f'TEST-{test_result}')
+        print(gtranslate_client.get_languages())
+
         print('TranslatorCog loaded')
 
     @commands.Cog.listener()
