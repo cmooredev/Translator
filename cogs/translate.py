@@ -6,7 +6,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
 import pymongo
-from google.cloud import translate_v2 as translate
+from google.cloud import translate
 
 from .authenticate import auth_apikey
 
@@ -40,8 +40,8 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = rf'{GOOGLE_AUTH}'
-        #gtranslate_client = translate.Client()
-        #print(f'GOOGLE AUTH-{gtranslate_client}')
+        gtranslate_client = translate.Client()
+        print(f'GOOGLE AUTH-{gtranslate_client}')
         print('TranslatorCog loaded')
 
     @commands.Cog.listener()
