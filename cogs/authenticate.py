@@ -30,9 +30,9 @@ def auth_apikey(server_id):
 
     reg_date = server_access['registration_date']
     to_expired = datetime.now() - reg_date
-    print(f'{30 - to_expired.days} days left until expired')
-
     credits = server_access['credits']
+    print(f'========== {server_id} ==========')
+    print(f'{30 - to_expired.days} days left until expired')
     print(f'{credits} are left for the month.')
 
     if to_expired.days < 0:
