@@ -6,7 +6,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from lingua import Language, LanguageDetectorBuilder
 import pymongo
-from google.cloud import translate_v2 as translate
+from google.cloud import translate
 from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
