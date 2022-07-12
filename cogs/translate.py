@@ -38,6 +38,10 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        #prevent bot from replying to self
+        if message.author == self.client.user:
+            return
+
         server_id = message.guild.id
         #authenticate api key
         if auth_apikey(server_id) == False:
@@ -53,16 +57,13 @@ class Translate(commands.Cog):
         #ignore emojis
         if user_message[0] == ':':
             return
+            
         #ignore custom emojis
         if user_message[0] == '<':
             return
 
         #ignore urls
         if user_message[:4] == 'http':
-            return
-
-        #prevent bot from replying to self
-        if message.author == self.client.user:
             return
 
         server_key = {'server_id': server_id}
