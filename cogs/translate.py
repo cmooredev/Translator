@@ -120,6 +120,10 @@ class Translate(commands.Cog):
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = basic_languages[server_lang]
+
+                if server_lang == 'english':
+                    google_target_lang = 'en'
+                    
                 print('UPDATED GOOGLE COUNTER')
                 credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
