@@ -23,15 +23,15 @@ class Authenticate(commands.Cog):
         print('Authenticate loaded')
 
 def auth_apikey(server_id):
-    print(f'authenticating....{server_id}')
+    print(f'authenticating....')
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
-    if server_access != None:
-        return True
-        print(f'{server_key}...... has access')
-    else:
+    if server_access is None:
         print('access denied')
         return False
+    else:
+        print(f'{server_id}...... has access')
+        return True
 
 
 async def setup(client):
