@@ -38,7 +38,7 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print('TranslatorCog loaded')
-        print(f'GOOGLE AUTH-{GOOGLE_AUTH}')
+        print(f'GOOGLE AUTH-{GOOGLE_AUTH} type: {type(GOOGLE_AUTH)}')
 
     @commands.Cog.listener()
     async def on_message(self, message):
