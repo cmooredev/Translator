@@ -125,7 +125,7 @@ class Translate(commands.Cog):
                 credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
-                google_result = result['translatedText']
+                google_result = str(result['translatedText'])
                 #refactor this into a function
                 embed=discord.Embed(description=google_result)
                 #displays user avatar
