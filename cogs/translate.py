@@ -43,6 +43,7 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         gtranslate_client = translate.Client(credentials=CREDENTIALS)
+        print(gtranslate_client)
         text = 'hola amigo'
         target = 'en'
         test_result = gtranslate_client.translate(text, target_language=target)
