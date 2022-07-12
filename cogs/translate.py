@@ -49,7 +49,6 @@ basic_languages = {
     'estonian': 'ET',
     'finnish': 'FT',
     'hungarian': 'HU',
-    'indonesian': 'ID',
     'italian': 'IT',
     'japanese': 'JA',
     'lithuanian': 'LT',
