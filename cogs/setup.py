@@ -16,7 +16,16 @@ class SelectLanguage(discord.ui.Select):
         options=[
             discord.SelectOption(label="english", emoji="🇺🇸", description="english"),
             discord.SelectOption(label="spanish", emoji="🇪🇸", description="spanish"),
-            discord.SelectOption(label="french", emoji="🇫🇷", description="french")
+            discord.SelectOption(label="french", emoji="🇫🇷", description="french"),
+            discord.SelectOption(label="bulgarian", emoji="🇧🇬", description="bulgarian"),
+            discord.SelectOption(label="czech", emoji="🇨🇿", description="czech"),
+            discord.SelectOption(label="danish", emoji="🇩🇰", description="danish"),
+            discord.SelectOption(label="german", emoji="🇩🇪", description="german"),
+            discord.SelectOption(label="greek", emoji="🇬🇷", description="greek"),
+            discord.SelectOption(label="estonian", emoji="🇪🇪", description="estonian"),
+            discord.SelectOption(label="finnish", emoji="🇫🇮", description="finnish"),
+            discord.SelectOption(label="hungarian", emoji="🇭🇺", description="hungarian"),
+            discord.SelectOption(label="indonesian", emoji="🇮🇩", description="indonesian"),
         ]
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
