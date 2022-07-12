@@ -121,16 +121,17 @@ class Translate(commands.Cog):
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = basic_languages[server_lang]
-                print(f'Language not supported by deepl. {google_target_lang}')
-
+                print('UPDATED COUNTER')
+                credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
-
+                google_result = result['translatedText']
                 #refactor this into a function
-                embed=discord.Embed(description=result)
+                embed=discord.Embed(description=google_result)
                 #displays user avatar
                 embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
                 await message.channel.send(embed=embed)
+                return
 
 
             if lingua_lang.lower() != server_lang.lower():
@@ -138,7 +139,7 @@ class Translate(commands.Cog):
                 #server credits
                 print('UPDATED COUNTER')
                 #increment counter
-                result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+                credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
