@@ -15,7 +15,6 @@ col = db['api_keys']
 
 
 class Authenticate(commands.Cog):
-
     def __init__(self, client):
         self.client = client
 
@@ -25,20 +24,25 @@ class Authenticate(commands.Cog):
 
 def auth_apikey(server_id):
     print(f'authenticating....')
+    #get server key and check registration date against current date
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
-    reg_date = server_access['registration_date']
-    days_to_expired = datetime.now() - reg_date
-    print(f'{30 - days_to_expired.days} days left until expired')
-    if days_to_expired.days < 0:
-        print('not expired')
 
-    if server_access is None:
-        print('access denied')
+    reg_date = server_access['registration_date']
+    to_expired = datetime.now() - reg_date
+    print(f'{30 - to_expired.days} days left until expired')
+
+    credits = server_access['credits']
+    print(f'{credits} are left for the month.')
+
+    if to_expired.days < 0:
+        print('Expired key...')
         return False
-    else:
-        print(f'{server_id}...... has access')
-        return True
+    if server_access is None:
+        print('No server found.')
+        return False
+
+    return True
 
 
 async def setup(client):
