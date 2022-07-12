@@ -17,9 +17,10 @@ detector = LanguageDetectorBuilder.from_languages(*languages).build()
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
-GOOGLE_STRING = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-GOOGLE_AUTH = json.loads(GOOGLE_STRING)
+GOOGLE_AUTH = json.loads(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
 GOOGLE_AUTH['private_key'] = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
+GOOGLE_PROJECT_ID = GOOGLE_AUTH['project_id']
+CREDENTIALS = service_account.Credentials.from_service_account_info(GOOGLE_AUTH)
 
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
@@ -42,7 +43,8 @@ class Translate(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print(GOOGLE_AUTH)
-        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = rf'{GOOGLE_AUTH}'
+
+
         gtranslate_client = translate.Client()
         print(f'GOOGLE AUTH-{gtranslate_client}')
         print('TranslatorCog loaded')
