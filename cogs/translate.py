@@ -125,8 +125,12 @@ class Translate(commands.Cog):
 
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
-                print(result)
-                return
+
+                #refactor this into a function
+                embed=discord.Embed(description=result)
+                #displays user avatar
+                embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
+                await message.channel.send(embed=embed)
 
 
             if lingua_lang.lower() != server_lang.lower():
