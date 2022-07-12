@@ -10,10 +10,8 @@ from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
-from .languages import lingua_languages
 
-
-detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
+detector = LanguageDetectorBuilder.from_all_spoken_languages().build()
 
 load_dotenv()
 #deepl credentials
