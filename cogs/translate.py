@@ -18,7 +18,7 @@ load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
 MONGO_URI = os.getenv('MONGO_URI')
 GOOGLE_AUTH = json.loads(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
-GOOGLE_AUTH['private_key'] = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
+#GOOGLE_AUTH['private_key'] = GOOGLE_AUTH['private_key'].replace('\\n', '\n')
 GOOGLE_PROJECT_ID = GOOGLE_AUTH['project_id']
 CREDENTIALS = service_account.Credentials.from_service_account_info(GOOGLE_AUTH)
 
