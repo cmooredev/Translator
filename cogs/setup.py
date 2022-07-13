@@ -33,7 +33,7 @@ class SelectLanguage(discord.ui.Select):
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
-        interaction.disabled = True
+        interaction.edit_original_message(view=None)
         #get server id to store specific target languages for multiple servers
         server_id = interaction.guild.id
         specs = {
