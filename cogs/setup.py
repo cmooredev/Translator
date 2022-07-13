@@ -11,7 +11,6 @@ MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
 col = db["server_lang"]
-interaction_finished = False
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
@@ -47,7 +46,7 @@ class SelectLanguage(discord.ui.Select):
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False)
-        interaction_finished = True
+        await self.stop()
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
@@ -77,12 +76,6 @@ class Setup(commands.Cog):
         msg = await ctx.send("Select what language you would like to translate text to:", view=select_view)
         msg = msg.id
         print(msg)
-        print(f'{interaction_finished} is it finished?')
-        while interaction_finished is False:
-            await asyncio.sleep(5)
-        print('--')
-        print(msg)
-
 
 async def setup(client):
     await client.add_cog(Setup(client))
