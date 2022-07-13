@@ -34,6 +34,7 @@ class SelectLanguage(discord.ui.Select):
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
+        self.disabled = True
         server_id = interaction.guild.id
         specs = {
             "server_id" : server_id,
@@ -46,7 +47,6 @@ class SelectLanguage(discord.ui.Select):
 
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
-        await self.delete_original_message()
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
