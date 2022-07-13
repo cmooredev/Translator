@@ -48,7 +48,7 @@ class SelectLanguage(discord.ui.Select):
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
         super().__init__(timeout=timeout)
-        await self.add_item(SelectLanguage())
+        self.add_item(SelectLanguage())
         self.stop()
 
 class Setup(commands.Cog):
