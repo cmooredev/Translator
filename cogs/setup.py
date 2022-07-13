@@ -45,11 +45,11 @@ class SelectLanguage(discord.ui.Select):
         server_key = {"server_id" : server_id}
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
-        await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False, delete_after=10)
+        await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False)
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 60):
+    def __init__(self, *, timeout = 10):
         super().__init__(timeout=timeout)
         self.add_item(SelectLanguage())
 
