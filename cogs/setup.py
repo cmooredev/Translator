@@ -75,7 +75,7 @@ class Setup(commands.Cog):
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to:", view=select_view)
         while interaction_finished is False:
-            sleep(2)
+            sleep(10)
         await msg.delete()
 
 async def setup(client):
