@@ -63,7 +63,6 @@ class Setup(commands.Cog):
         #need to implement setup that lets users configure target lang
         #select = Select()
 
-
         #load initial settings here
         #########
         print('SetupCog loaded')
@@ -73,10 +72,7 @@ class Setup(commands.Cog):
     async def config(self, ctx):
         #send select menu to user
         select_view = SelectView()
-        msg = await ctx.send("Select what language you would like to translate text to:", view=select_view, delete_after=15)
-        msg = msg.id
-        print(msg)
-
+        msg = await ctx.send("Select what language you would like to translate text to: \n This message will delete in 10 seconds.", view=select_view, delete_after=10)
 
 async def setup(client):
     await client.add_cog(Setup(client))
