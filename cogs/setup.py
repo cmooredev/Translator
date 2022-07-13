@@ -72,7 +72,7 @@ class Setup(commands.Cog):
         #send select menu to user
         select_view = SelectView()
         await ctx.send("Select what language you would like to translate text to:", view=select_view)
-        await select_view.stop()
+        
 
 async def setup(client):
     await client.add_cog(Setup(client))
