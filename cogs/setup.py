@@ -46,7 +46,7 @@ class SelectLanguage(discord.ui.Select):
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False)
-        await self.stop()
+        self.stop()
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
@@ -76,6 +76,7 @@ class Setup(commands.Cog):
         msg = await ctx.send("Select what language you would like to translate text to:", view=select_view)
         msg = msg.id
         print(msg)
+
 
 async def setup(client):
     await client.add_cog(Setup(client))
