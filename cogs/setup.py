@@ -4,6 +4,7 @@ import pymongo
 from dotenv import load_dotenv
 import os
 import time
+import asyncio
 
 load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI')
@@ -76,8 +77,9 @@ class Setup(commands.Cog):
         msg = await ctx.send("Select what language you would like to translate text to:", view=select_view)
         msg = msg.id
         print(msg)
+        print(f'{interaction_finished} is it finished?')
         while interaction_finished is False:
-            sleep(10)
+            asyncio.sleep(5)
         print('--')
         print(msg)
 
