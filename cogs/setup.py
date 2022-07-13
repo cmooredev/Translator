@@ -79,7 +79,7 @@ class Setup(commands.Cog):
         print(msg)
         print(f'{interaction_finished} is it finished?')
         while interaction_finished is False:
-            asyncio.sleep(5)
+            await asyncio.sleep(5)
         print('--')
         print(msg)
 
