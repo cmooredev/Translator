@@ -49,7 +49,6 @@ class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
         super().__init__(timeout=timeout)
         self.add_item(SelectLanguage())
-        self.stop()
 
 class Setup(commands.Cog):
 
@@ -71,7 +70,8 @@ class Setup(commands.Cog):
     async def config(self, ctx):
         #send select menu to user
         select_view = SelectView()
-        await ctx.send("Select what language you would like to translate text to:", view=select_view)
+        msg = await ctx.send("Select what language you would like to translate text to:", view=select_view)
+        await msg.delete()
 
 
 async def setup(client):
