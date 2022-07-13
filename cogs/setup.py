@@ -45,7 +45,7 @@ class SelectLanguage(discord.ui.Select):
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False)
-
+        self.view = None
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 60):
