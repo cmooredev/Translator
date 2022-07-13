@@ -34,7 +34,6 @@ class SelectLanguage(discord.ui.Select):
             max_values=1, min_values=1, options=options)
     async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
-        self.disabled = True
         server_id = interaction.guild.id
         specs = {
             "server_id" : server_id,
@@ -44,7 +43,6 @@ class SelectLanguage(discord.ui.Select):
         server_key = {"server_id" : server_id}
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
-
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=True)
 
 
@@ -72,7 +70,9 @@ class Setup(commands.Cog):
     @commands.has_permissions(administrator = True)
     async def config(self, ctx):
         #send select menu to user
-        await ctx.send("Select what language you would like to translate text to:", view=SelectView())
+        select_view = SelectView()
+        await ctx.send("Select what language you would like to translate text to:", view=select_view)
+        await select_view.stop()
 
 async def setup(client):
     await client.add_cog(Setup(client))
