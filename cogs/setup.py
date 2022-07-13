@@ -46,7 +46,7 @@ class SelectLanguage(discord.ui.Select):
         await interaction.response.send_message(content=f"Your choice is {self.values[0]}", ephemeral=False, view=None)
 
 class SelectView(discord.ui.View):
-    async def __init__(self, *, timeout = 60):
+    def __init__(self, *, timeout = 60):
         super().__init__(timeout=timeout)
         await self.add_item(SelectLanguage())
         self.stop()
@@ -70,7 +70,7 @@ class Setup(commands.Cog):
     @commands.has_permissions(administrator = True)
     async def config(self, ctx):
         #send select menu to user
-        await select_view = SelectView()
+        select_view = SelectView()
         await ctx.send("Select what language you would like to translate text to:", view=select_view)
 
 
