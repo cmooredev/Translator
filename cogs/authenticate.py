@@ -40,6 +40,9 @@ def auth_apikey(server_id):
         return False
 
     credits = server_access['credits']
+    if credits < 0:
+        print('Ran out of credits...')
+        return False
     print(f'========== {server_id} ==========')
     print(f'{30 - to_expired.days} days left until expired')
     print(f'{credits} are left for the month.')
