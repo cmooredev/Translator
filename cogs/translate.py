@@ -112,7 +112,6 @@ class Translate(commands.Cog):
         server_credits = server_sub['credits']
         server_lang = lang['target_lang']
 
-
         if 'Translate' in str(message.author.roles):
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
@@ -140,7 +139,6 @@ class Translate(commands.Cog):
                 embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
                 await message.channel.send(embed=embed)
                 return
-
 
             if lingua_lang.lower() != server_lang.lower():
 
