@@ -33,9 +33,7 @@ gtranslate_client = translate.Client(credentials=CREDENTIALS)
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 db = mongodb_client["translatordb"]
-col = db["server_lang"]
-
-sub_col = db["api_keys"]
+col = db["api_keys"]
 
 basic_languages = {
     'french':'FR',
@@ -83,7 +81,8 @@ class Translate(commands.Cog):
             return
 
         server_id = message.guild.id
-        #authenticate api key
+
+        #authenticate server
         if auth_apikey(server_id) == False:
             return
 
@@ -108,7 +107,7 @@ class Translate(commands.Cog):
 
         server_key = {'server_id': server_id}
         lang = col.find_one(server_key)
-        server_sub = sub_col.find_one(server_key)
+        server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
         server_lang = lang['target_lang']
 
@@ -124,7 +123,7 @@ class Translate(commands.Cog):
                 if server_lang == 'english':
                     google_target_lang = 'en'
 
-                credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+                credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
                 google_detected_lang = result['detectedSourceLanguage']
@@ -143,7 +142,7 @@ class Translate(commands.Cog):
             if lingua_lang.lower() != server_lang.lower():
 
                 #increment counter
-                credit_result = sub_col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+                credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
 
                 translator = deepl.Translator(DEEPL_AUTH)
                 #translate message into target language
@@ -165,7 +164,7 @@ class Translate(commands.Cog):
         server_key = {'server_id': ctx.guild.id}
         lang = col.find_one(server_key)
         result = lang['target_lang']
-        server_credits = sub_col.find_one(server_key)
+        server_credits = col.find_one(server_key)
         current_credits = server_credits['credits']
         await ctx.send(f'Current target language: {result.upper()} Credits: {current_credits}')
 
