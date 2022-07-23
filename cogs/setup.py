@@ -80,7 +80,7 @@ class Setup(commands.Cog):
                  "choice": "lang"
                 }
         ]
-        result = col.update_one(server_key, {'$set': {"user_langs": user_choice}}, True)
+        result = col.update_one(server_key, {'$set': {"user_langs": {"test":user_choice}}}}, True)
         print(users)
         #send select menu to user
         select_view = SelectView()
