@@ -80,6 +80,9 @@ class Translate(commands.Cog):
         if message.author == self.client.user:
             return
 
+        if message.author.bot:
+            return
+
         server_id = message.guild.id
 
         #authenticate server
