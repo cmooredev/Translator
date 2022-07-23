@@ -68,7 +68,7 @@ class Setup(commands.Cog):
         print('SetupCog loaded')
 
     @commands.command()
-    @commands.has_permissions(administrator = True)
+    #@commands.has_permissions(administrator = True)
     async def config(self, ctx):
         #get user id
         server_id = ctx.guild.id
