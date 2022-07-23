@@ -75,7 +75,7 @@ class Setup(commands.Cog):
         server_key = {"server_id" : server_id}
         user_id = ctx.author.id
         user_choice =  [
-                {user_id : "language"}
+                {"id" : user_id}
         ]
         result = col.update_one(server_key, {'$set': {"user_langs": user_choice}}, True)
         #send select menu to user
