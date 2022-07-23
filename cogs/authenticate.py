@@ -28,7 +28,7 @@ def auth_apikey(server_id):
     server_access = col.find_one(server_key)
 
     if server_access is None:
-        print('No server found.')
+        print('No key found.')
         return False
 
     #get registration date and check if expired
