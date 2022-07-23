@@ -75,7 +75,7 @@ class Setup(commands.Cog):
         server_key = {"server_id" : server_id}
         user_id = ctx.author.id
         user_choice =  [{
-            user_id :
+            "id" :
                 {"id" : user_id,
                  "choice": "lang"
                 }
