@@ -11,6 +11,7 @@ MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
 col = db["api_keys"]
+users = db["api_keys"]["user_langs"]
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
@@ -74,8 +75,13 @@ class Setup(commands.Cog):
         server_id = ctx.guild.id
         server_key = {"server_id" : server_id}
         user_id = ctx.author.id
-        user_choice =  {"id": user_id}
+        user_choice =  [
+                {"id" : user_id,
+                 "choice": "lang"
+                }
+        ]
         result = col.update_one(server_key, {'$set': {"user_langs": user_choice}}, True)
+        print(users)
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
