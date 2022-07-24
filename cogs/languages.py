@@ -1,3 +1,6 @@
+import discord
+from discord.ext import commands
+
 basic_languages = {
     'french':'FR',
     'english':'EN-US',
@@ -26,3 +29,17 @@ basic_languages = {
     'chinese': 'ZH',
     'indonesian': 'IN',
 }
+
+
+
+class Languages(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('Languages loaded')
+
+
+async def setup(client):
+    await client.add_cog(Languages(client))
