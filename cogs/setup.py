@@ -75,11 +75,12 @@ class Setup(commands.Cog):
         server_id = ctx.guild.id
         server_key = {"server_id" : server_id}
         user_id = ctx.author.id
-        user_choice =  {
-            "id" : user_id,
-            "choice": "lang"
-            }
-        result = users.update_one({"id" : user_id}, {'$set': {"user_langs": user_choice}}, True)
+        user_choice =
+                {"id" : user_id,
+                 "choice": "lang"
+                }
+        
+        result = users.update_one(server_key, {'$set': user_choice}, True)
         print(users)
         #send select menu to user
         select_view = SelectView()
