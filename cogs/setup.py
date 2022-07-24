@@ -82,10 +82,10 @@ class Setup(commands.Cog):
             for arg in args:
                 #need to check if valid user
                 print(arg)
-                print(arg[-2:-1])
+                print(arg[:-1])
                 print(type(arg))
                 arg = str(arg)
-                print(f'2---{arg[-2:-1]}')
+                print(f'2---{arg[:-1]}')
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
