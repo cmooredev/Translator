@@ -10,6 +10,7 @@ from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
 
 from .authenticate import auth_apikey
+from .languages import basic_languages
 
 lingua_languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH,
     Language.CHINESE, Language.DUTCH, Language.HINDI,
@@ -34,35 +35,6 @@ mongodb_client = pymongo.MongoClient(MONGO_URI)
 
 db = mongodb_client["translatordb"]
 col = db["api_keys"]
-
-basic_languages = {
-    'french':'FR',
-    'english':'EN-US',
-    'spanish':'ES',
-    'bulgarian': 'BG',
-    'czech': 'CZ',
-    'danish': 'DA',
-    'german': 'DE',
-    'greek': 'EL',
-    'estonian': 'ET',
-    'finnish': 'FT',
-    'hungarian': 'HU',
-    'italian': 'IT',
-    'japanese': 'JA',
-    'lithuanian': 'LT',
-    'latvian': 'LV',
-    'dutch': 'NL',
-    'polish': 'PL',
-    'portuguese': 'PT-PT',
-    'romanian': 'RO',
-    'russian': 'RU',
-    'slovak': 'SK',
-    'slovenian': 'SL',
-    'turkish': 'TR',
-    'swedish': 'SV',
-    'chinese': 'ZH',
-    'indonesian': 'IN',
-}
 
 class Translate(commands.Cog):
 
