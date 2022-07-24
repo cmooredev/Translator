@@ -56,8 +56,7 @@ class SelectLanguage(discord.ui.Select):
         ## retrieve a user's lang
         user_lang = col.find_one(server_key)
         user_lang = user_lang['user_langs'][f'{user_id}']
-        user_lang = user_lang['lang']
-        print(f'this is the test rest {user_lang}')
+        print(f'this is the test rest {user_lang} and {type(user_lang)}')
 
         await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
