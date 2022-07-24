@@ -90,6 +90,7 @@ class Setup(commands.Cog):
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
                 print(user)
+                print(ctx.guild.members)
                 print(user_object)
         #send select menu to user
         select_view = SelectView()
