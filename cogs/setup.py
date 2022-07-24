@@ -53,10 +53,10 @@ class SelectLanguage(discord.ui.Select):
         result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
 
 
-        ## retrieve list of user_langs
-        test_rest = col.find_one(server_key)
-        test_rest = test_rest['user_langs']['622051984148791317']
-        print(f'this is the test rest {test_rest}')
+        ## retrieve a user's lang
+        user_lang = col.find_one(server_key)
+        user_lang = user_lang['user_langs'][user_id]['lang']
+        print(f'this is the test rest {user_lang}')
 
         await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
