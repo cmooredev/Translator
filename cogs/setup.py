@@ -87,7 +87,7 @@ class Setup(commands.Cog):
         if argCount > 0:
             for arg in args:
                 #need to check if valid user
-                user = arg[2:-1]
+                user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
                 print(user)
                 print(user_object)
