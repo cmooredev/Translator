@@ -76,10 +76,10 @@ class Setup(commands.Cog):
         user_id = ctx.author.id
         user_choice =  [
                 {"id" : user_id,
-                 "choice": "lang"
+                 "choice": "lang"    
                 }
         ]
-        result = col.update_one(server_key, {'$set': {"user_langs.$[]": user_choice}}, True)
+        result = col.update_one(server_key, {'$set': {"user_langs": user_choice}}, True)
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
