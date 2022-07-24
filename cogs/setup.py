@@ -90,7 +90,7 @@ class Setup(commands.Cog):
                 user = arg[2:-1]
                 print(user)
                 print(ctx.author.id)
-                if user == ctx.author.id:
+                if user == str(ctx.author.id):
                     print('match found')
         #send select menu to user
         select_view = SelectView()
