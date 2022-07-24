@@ -75,15 +75,9 @@ class Setup(commands.Cog):
 
     @commands.command()
     #@commands.has_permissions(administrator = True)
-    async def config(self, ctx, *args):
+    async def config(self, ctx, user: discord.User):
         #get user id
-        argCount = len(args)
-        if argCount > 0:
-            for arg in args:
-                print(type(discord.User))
-                print(type(arg))
-                if type(arg) == type(discord.User):
-                    print(ok)
+        print(user)
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
