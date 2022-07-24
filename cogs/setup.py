@@ -51,6 +51,10 @@ class SelectLanguage(discord.ui.Select):
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
         result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
+
+        test_rest = col.find(server_key, {f"user_langs.{user_id}"}: {})
+        print(f'this is the test rest {test_rest}')
+
         await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
 
@@ -81,11 +85,7 @@ class Setup(commands.Cog):
         if argCount > 0:
             for arg in args:
                 #need to check if valid user
-                print(arg)
-                print(arg[:-1])
-                print(type(arg))
-                arg = str(arg)
-                print(f'2---{arg[:-1]}')
+                print(arg[2:-1])
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
