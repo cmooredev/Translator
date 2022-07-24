@@ -88,10 +88,9 @@ class Setup(commands.Cog):
             for arg in args:
                 #need to check if valid user
                 user = arg[2:-1]
+                user_object = ctx.guild.get_member(user)
                 print(user)
-                print(ctx.author.id)
-                if user == str(ctx.author.id):
-                    print('match found')
+                print(user_object)
         #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
