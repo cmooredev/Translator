@@ -11,7 +11,7 @@ MONGO_URI = os.getenv('MONGO_URI')
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 db = mongodb_client["translatordb"]
 col = db["api_keys"]
-users = db["api_keys"]["user_langs"]
+users = db["api_keys.user_langs"]
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
