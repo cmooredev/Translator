@@ -62,7 +62,5 @@ class Languages(commands.Cog):
         print(full_languages)
 
 
-
-
 async def setup(client):
     await client.add_cog(Languages(client))

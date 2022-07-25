@@ -76,6 +76,7 @@ class Translate(commands.Cog):
         if user_message[:4] == 'http':
             return
 
+        channel = message.channel
         server_key = {'server_id': server_id}
         lang = col.find_one(server_key)
         server_sub = col.find_one(server_key)
@@ -83,6 +84,11 @@ class Translate(commands.Cog):
         server_lang = lang['target_lang']
 
         if 'Translate' in str(message.author.roles):
+
+            #if translating - start typing
+            await channel.typing()
+            
+
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
