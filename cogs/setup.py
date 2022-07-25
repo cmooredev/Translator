@@ -39,7 +39,7 @@ class SelectLanguage(discord.ui.Select):
         chosen_lang = self.values[0]
         user_id = interaction.user.id
         user_choice =  {"lang": chosen_lang}
-
+        print(args)
 
         server_id = interaction.guild.id
         specs = {
