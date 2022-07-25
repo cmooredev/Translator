@@ -4,7 +4,7 @@ import deepl
 import json
 from discord.ext import commands
 from dotenv import load_dotenv
-from lingua import Language, LanguageDetectorBuilder
+from lingua import LanguageDetectorBuilder
 import pymongo
 from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
