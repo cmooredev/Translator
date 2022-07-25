@@ -31,6 +31,11 @@ basic_languages = {
     'indonesian': 'IN',
 }
 
+full_languages = basic_languages + {
+    'test' : 'lang'
+
+    }
+
 
 lingua_languages = [Language.ARABIC, Language.ENGLISH, Language.FRENCH, Language.GERMAN,
                     Language.CHINESE, Language.DUTCH, Language.HINDI, Language.SPANISH,
