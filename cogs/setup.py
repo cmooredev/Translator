@@ -14,7 +14,7 @@ col = db["api_keys"]
 
 #select menu for choosing a target language
 class SelectLanguage(discord.ui.Select):
-    def __init__(self, *args):
+    def __init__(self):
         options=[
             discord.SelectOption(label="english", emoji="🇺🇸", description="english"),
             discord.SelectOption(label="spanish", emoji="🇪🇸", description="spanish"),
@@ -34,12 +34,12 @@ class SelectLanguage(discord.ui.Select):
         ]
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
-    async def callback(self, interaction: discord.Interaction, args):
+    async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
         chosen_lang = self.values[0]
         user_id = interaction.user.id
         user_choice =  {"lang": chosen_lang}
-        print(args)
+
 
         server_id = interaction.guild.id
         specs = {
@@ -61,9 +61,9 @@ class SelectLanguage(discord.ui.Select):
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *args, timeout = 10):
+    def __init__(self, *, timeout = 10):
         super().__init__(timeout=timeout)
-        self.add_item(SelectLanguage(args))
+        self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
 
@@ -93,7 +93,7 @@ class Setup(commands.Cog):
                 print(ctx.guild.members)
                 print(user_object)
         #send select menu to user
-        select_view = SelectView(args)
+        select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 
 async def setup(client):
