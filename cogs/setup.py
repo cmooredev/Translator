@@ -60,8 +60,8 @@ class SelectLanguage(discord.ui.Select):
         await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
 
-class SelectView(discord.ui.View, *args):
-    def __init__(self, *, timeout = 10):
+class SelectView(discord.ui.View):
+    def __init__(self, *args, timeout = 10):
         super().__init__(timeout=timeout)
         self.add_item(SelectLanguage(args))
 
