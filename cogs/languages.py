@@ -57,6 +57,12 @@ class Languages(commands.Cog):
     async def on_ready(self):
         print('Languages loaded')
 
+    @commands.command()
+    async def langs(self, ctx):
+        print(full_languages)
+
+
+
 
 async def setup(client):
     await client.add_cog(Languages(client))
