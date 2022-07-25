@@ -31,10 +31,12 @@ basic_languages = {
     'indonesian': 'IN',
 }
 
-full_languages = basic_languages + {
+ext_languages = {
     'test' : 'lang'
 
     }
+
+full_languages = {**basic_languages, **ext_languages}
 
 
 lingua_languages = [Language.ARABIC, Language.ENGLISH, Language.FRENCH, Language.GERMAN,
