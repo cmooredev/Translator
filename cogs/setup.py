@@ -34,7 +34,7 @@ class SelectLanguage(discord.ui.Select):
         ]
         super().__init__(placeholder="Languages",
             max_values=1, min_values=1, options=options)
-    async def callback(self, interaction: discord.Interaction):
+    async def callback(self, interaction: discord.Interaction, args):
         #get server id to store specific target languages for multiple servers
         chosen_lang = self.values[0]
         user_id = interaction.user.id
