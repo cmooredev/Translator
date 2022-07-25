@@ -16,7 +16,7 @@ lingua_languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language
     Language.CHINESE, Language.DUTCH, Language.HINDI,
     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN
     , Language.TURKISH, Language.INDONESIAN]
-detector = LanguageDetectorBuilder.from_all_languages().build()
+detector = LanguageDetectorBuilder.from_all_spoken_languages().build()
 
 load_dotenv()
 #deepl credentials
