@@ -89,6 +89,10 @@ class Translate(commands.Cog):
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
             print(lingua_lang)
+
+            if lingua_lang.lower() == server_lang.lower():
+                return
+
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = basic_languages[server_lang]
@@ -114,26 +118,26 @@ class Translate(commands.Cog):
                 await message.channel.send(embed=embed)
                 return
 
-            if lingua_lang.lower() != server_lang.lower():
 
-                #increment counter
-                credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+            #increment counter
+            credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
 
-                translator = deepl.Translator(DEEPL_AUTH)
-                #translate message into target language
-                result = translator.translate_text(user_message, target_lang=basic_languages[server_lang])
-                #if translation results in same message
-                if str(user_message) == str(result):
-                    print(f"No translation found. ---- {result}")
-                    return
-                #if translating - start typing
-                await channel.typing()
-                #embedded message with op name and avatar
-                #--# TODO: Custom color based on Language? Channel?
-                embed=discord.Embed(description=result)
-                #displays user avatar
-                embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
-                await message.channel.send(embed=embed)
+            translator = deepl.Translator(DEEPL_AUTH)
+            #translate message into target language
+            result = translator.translate_text(user_message, target_lang=basic_languages[server_lang])
+            #if translation results in same message
+            if str(user_message) == str(result):
+                print(f"No translation found. ---- {result}")
+                return
+            #if translating - start typing
+            await channel.typing()
+            #embedded message with op name and avatar
+            #--# TODO: Custom color based on Language? Channel?
+            embed=discord.Embed(description=result)
+            #displays user avatar
+            embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
+            await message.channel.send(embed=embed)
+            return
 
 
     @commands.command()
