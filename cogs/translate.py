@@ -85,10 +85,6 @@ class Translate(commands.Cog):
 
         if 'Translate' in str(message.author.roles):
 
-            #if translating - start typing
-            await channel.typing()
-            
-
             lingua_result = detector.detect_language_of(user_message)
             #hard coded target language, need to move to variable
             lingua_lang = lingua_result.name
@@ -109,6 +105,8 @@ class Translate(commands.Cog):
                 if str(user_message) == google_result:
                     print(f"No translation found. ---- {result}")
                     return
+                #if translating - start typing
+                await channel.typing()
                 #refactor this into a function
                 embed=discord.Embed(description=google_result)
                 #displays user avatar
@@ -128,6 +126,8 @@ class Translate(commands.Cog):
                 if str(user_message) == str(result):
                     print(f"No translation found. ---- {result}")
                     return
+                #if translating - start typing
+                await channel.typing()
                 #embedded message with op name and avatar
                 #--# TODO: Custom color based on Language? Channel?
                 embed=discord.Embed(description=result)
