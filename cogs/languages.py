@@ -42,11 +42,8 @@ full_languages = {**basic_languages, **ext_languages}
 lingua_languages = [Language.ARABIC, Language.ENGLISH, Language.FRENCH, Language.GERMAN,
                     Language.CHINESE, Language.DUTCH, Language.HINDI, Language.SPANISH,
                     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN,
-                    Language.TURKISH, Language.INDONESIAN, Language.BELARUSIAN, Language.CZECH,
-                    Language.ESTONIAN, Language.GERMAN, Language.HEBREW, Language.KOREAN,
-                    Language.LATVIAN, Language.MONGOLIAN, Language.PORTUGUESE, Language.SLOVAK,
-                    Language.SWAHILI, Language.TAGALOG, Language.THAI, Language.VIETNAMESE,
-                    Language.UKRAINIAN]
+                    Language.TURKISH, Language.INDONESIAN, Language.CZECH, Language.ESTONIAN, 
+                    Language.GERMAN, Language.KOREAN, Language.PORTUGUESE, Language.UKRAINIAN]
 
 
 class Languages(commands.Cog):
