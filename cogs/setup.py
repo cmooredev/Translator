@@ -81,9 +81,10 @@ class Setup(commands.Cog):
 
     @commands.command()
     #@commands.has_permissions(administrator = True)
-    async def config(self, ctx, *args):
+    async def trconfig(self, ctx, *args):
         #get user id
         argCount = len(args)
+        #if user passes in multiple arguments, check if it is a valid user
         if argCount > 0:
             for arg in args:
                 #need to check if valid user
