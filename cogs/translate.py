@@ -86,7 +86,7 @@ class Translate(commands.Cog):
 
 
         print(f'SERVER LANG ----------> {server_lang} <-----------')
-        user_lang = server_lang.find_one({})
+        user_lang = server_lang[0]
         print(f'USER LANG ----------> {user_lang} <-----------')
         ###
 
