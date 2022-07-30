@@ -55,8 +55,9 @@ class SelectLanguage(discord.ui.Select):
         selected_users = self.view.selected_user
         if selected_users != []:
             for user in selected_users:
-                user_lang = col.find_one(server_key)
-                user_lang = user_lang['user_langs'][f'{user}']['lang']
+                print(user)
+                #user_lang = col.find_one(server_key)
+                #user_lang = user_lang['user_langs'][f'{user}']['lang']
         else:
             print('Empty list')
         ## retrieve a user's lang
