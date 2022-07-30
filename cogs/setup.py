@@ -96,9 +96,8 @@ class Setup(commands.Cog):
                 ### URGENT!!!!!!!!  still need to check if valid user
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
-                print(user)
-                print(ctx.guild.members)
-                print(user_object)
+                print(f'user -> {user}')
+                print(f'user_object -> {user_object}')
                 users_to_set_lang.append(user_object)
         #send select menu to user
         select_view = SelectView(selected_users=['user1', 'user2'])
