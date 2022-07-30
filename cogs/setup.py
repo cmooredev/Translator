@@ -60,7 +60,7 @@ class SelectLanguage(discord.ui.Select):
         ## print self specific user to check
 
 
-        await interaction.response.send_message(content=f"Your choice is xx {self.specific_user}", ephemeral=True)
+        await interaction.response.send_message(content=f"Your choice is xx {user_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
