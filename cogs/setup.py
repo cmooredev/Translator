@@ -37,6 +37,7 @@ class SelectLanguage(discord.ui.Select):
     async def callback(self, interaction: discord.Interaction):
         #get server id to store specific target languages for multiple servers
         chosen_lang = self.values[0]
+        user = interaction.user
         user_id = interaction.user.id
         user_choice =  {"lang": chosen_lang}
 
@@ -44,7 +45,6 @@ class SelectLanguage(discord.ui.Select):
         server_id = interaction.guild.id
         specs = {
             "server_id" : server_id,
-            "target_lang" : chosen_lang,
         }
 
         server_key = {"server_id" : server_id}
@@ -54,10 +54,10 @@ class SelectLanguage(discord.ui.Select):
 
 
         ## retrieve a user's lang
-        user_lang = col.find_one(server_key)
-        user_lang = user_lang['user_langs'][f'{user_id}']['lang']
+        #user_lang = col.find_one(server_key)
+        #user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
-        await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
+        await interaction.response.send_message(content=f"{user}'s' choice is {chosen_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
