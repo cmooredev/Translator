@@ -39,7 +39,10 @@ class SelectLanguage(discord.ui.Select):
         chosen_lang = self.values[0]
         user = interaction.user
         user_id = interaction.user.id
-        user_choice =  {"lang": chosen_lang}
+        user_choice =  {
+            "user": user_id,
+            "lang": chosen_lang
+        }
 
 
         server_id = interaction.guild.id
@@ -50,7 +53,7 @@ class SelectLanguage(discord.ui.Select):
         server_key = {"server_id" : server_id}
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
-        result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
+        result = col.update_one(server_key, {'$set': {f"user_langs": user_choice}}, True)
 
 
         ## retrieve a user's lang
