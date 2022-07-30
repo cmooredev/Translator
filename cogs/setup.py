@@ -106,6 +106,8 @@ class Setup(commands.Cog):
                     print(f'user -> {user_id}')
                     print(f'user_object -> {user_object}')
                     users_to_set_lang.append(user_id)
+                else:
+                    print('not valid user')
         #send select menu to user
         select_view = SelectView(selected_users=users_to_set_lang)
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
