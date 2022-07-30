@@ -52,7 +52,7 @@ class SelectLanguage(discord.ui.Select):
         result = col.update_one(server_key, {'$set':specs}, True)
         result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
 
-
+        print(f'call back {self.selected_user}')
         ## retrieve a user's lang
         #user_lang = col.find_one(server_key)
         #user_lang = user_lang['user_langs'][f'{user_id}']['lang']
@@ -102,7 +102,6 @@ class Setup(commands.Cog):
                     users_to_set_lang.append(user_id)
         #send select menu to user
         select_view = SelectView(selected_users=users_to_set_lang)
-        print(select_view.selected_user)
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 
 async def setup(client):
