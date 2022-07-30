@@ -49,10 +49,13 @@ class SelectLanguage(discord.ui.Select):
         }
 
         server_key = {"server_id" : server_id}
+        server_sub = col.find_one(server_key)
+        server_lang = server_sub[f'user_langs']
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
-        result = col.update_one(server_key, {'$set': {f"user_langs": user_choice}}, True)
 
+        result = col.update_one(server_key, {'$set': {f"user_langs": user_choice}}, True)
+        print(server_lang)
 
         ## retrieve a user's lang
         #user_lang = col.find_one(server_key)

@@ -85,7 +85,7 @@ class Translate(commands.Cog):
         server_lang = server_sub[f'user_langs']
 
 
-        server_sub.find_one({"user_langs.{user_id}"})
+
 
         print(f'SERVER LANG ----------> {server_lang} <-----------')
         print(f'USER LANG ----------> {user_lang} <-----------')
