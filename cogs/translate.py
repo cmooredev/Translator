@@ -83,7 +83,7 @@ class Translate(commands.Cog):
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
         ### this is where u made change to test
-        server_lang = lang['userlangs']['{user_id}']
+        server_lang = lang['userlangs']
         print(f'SERVER LANG ----------> server_lang <-----------')
         ###
 
