@@ -44,6 +44,7 @@ class SelectLanguage(discord.ui.Select):
         server_id = interaction.guild.id
         specs = {
             "server_id" : server_id,
+            "target_lang" : chosen_lang,
         }
 
         server_key = {"server_id" : server_id}
@@ -56,7 +57,11 @@ class SelectLanguage(discord.ui.Select):
         #user_lang = col.find_one(server_key)
         #user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
-        await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
+        ## print self specific user to check
+        #print(self.specific_user)
+
+
+        await interaction.response.send_message(content=f"Your choice is {user_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
