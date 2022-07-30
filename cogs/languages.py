@@ -7,7 +7,7 @@ basic_languages = {
     'english':'EN-US',
     'spanish':'ES',
     'bulgarian': 'BG',
-    'czech': 'CZ',
+    'czech': 'CS',
     'danish': 'DA',
     'german': 'DE',
     'greek': 'EL',
@@ -42,7 +42,7 @@ full_languages = {**basic_languages, **ext_languages}
 lingua_languages = [Language.ARABIC, Language.ENGLISH, Language.FRENCH, Language.GERMAN,
                     Language.CHINESE, Language.DUTCH, Language.HINDI, Language.SPANISH,
                     Language.ITALIAN, Language.JAPANESE, Language.POLISH, Language.RUSSIAN,
-                    Language.TURKISH, Language.INDONESIAN, Language.CZECH, Language.GERMAN, 
+                    Language.TURKISH, Language.INDONESIAN, Language.CZECH, Language.GERMAN,
                     Language.KOREAN, Language.UKRAINIAN]
 
 
