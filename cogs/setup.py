@@ -61,8 +61,8 @@ class SelectLanguage(discord.ui.Select):
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 10):
-        super().__init__(timeout=timeout)
+    def __init__(self, *, timeout = 10, user=123456789):
+        super().__init__(timeout=timeout, user)
         self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
@@ -78,6 +78,10 @@ class Setup(commands.Cog):
         #load initial settings here
         #########
         print('SetupCog loaded')
+
+
+    # check if a arg is passed in
+    # if it isnt passed, set to NONE
 
     @commands.command()
     #@commands.has_permissions(administrator = True)
