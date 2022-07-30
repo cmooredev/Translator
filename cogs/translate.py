@@ -9,6 +9,11 @@ import pymongo
 from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
 
+import logging
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.NOTSET)
+
 from .authenticate import auth_apikey
 from .languages import basic_languages, lingua_languages
 
