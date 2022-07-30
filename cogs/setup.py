@@ -58,16 +58,17 @@ class SelectLanguage(discord.ui.Select):
         user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
         ## print self specific user to check
+        print(self.specific_user)
 
 
         await interaction.response.send_message(content=f"Your choice is {user_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 10):
-        super().__init__(timeout=timeout)
+    def __init__(self, *, timeout = 10, specific_user):
+        super().__init__(timeout=timeout, specific_user)
         self.add_item(SelectLanguage())
-        self.specific_user = '';
+        self.specific_user = specific_user;
         self.specific_user_lang = '';
 
 
@@ -100,9 +101,7 @@ class Setup(commands.Cog):
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
 
-                #store specifc user in select view to pass it
-                select_view.specific_user = user_object
-                print(select_view.specific_user)
+                print(user_object)
 
 
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
