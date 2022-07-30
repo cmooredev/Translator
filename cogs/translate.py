@@ -9,11 +9,6 @@ import pymongo
 from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
 
-import logging
-
-logger = logging.getLogger('discord')
-logger.setLevel(logging.NOTSET)
-
 from .authenticate import auth_apikey
 from .languages import basic_languages, lingua_languages
 
@@ -89,7 +84,9 @@ class Translate(commands.Cog):
         ### this is where u made change to test
         server_lang = server_sub[f'user_langs']
 
+        key = {'936034736172826685': {'lang': 'finnish'}
 
+        user_lang = server_lang.find_one(key)
 
         print(f'SERVER LANG ----------> {server_lang} <-----------')
         print(f'USER LANG ----------> {user_lang} <-----------')

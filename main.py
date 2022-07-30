@@ -4,10 +4,6 @@ import pymongo
 import os
 from discord.ext import commands
 from dotenv import load_dotenv
-import logging
-
-logger = logging.getLogger('discord')
-logger.setLevel(logging.NOTSET)
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
