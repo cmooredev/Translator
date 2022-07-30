@@ -48,28 +48,21 @@ class SelectLanguage(discord.ui.Select):
         }
 
         server_key = {"server_id" : server_id}
+        #update server info
+        result = col.update_one(server_key, {'$set':specs}, True)
+        result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
 
 
-        selected_users = self.view.selected_user
-        if selected_users != []:
-            for user in selected_users:
-                print(user)
-                #update server info
-                result = col.update_one(server_key, {'$set':specs}, True)
-                result = col.update_one(server_key, {'$set': {f"user_langs.{user}": user_choice}}, True)
-
-        else:
-            print('Empty list')
         ## retrieve a user's lang
-
+        user_lang = col.find_one(server_key)
+        user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
         await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 10, selected_users = []):
+    def __init__(self, *, timeout = 10):
         super().__init__(timeout=timeout)
-        self.selected_user = selected_users
         self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
@@ -86,30 +79,12 @@ class Setup(commands.Cog):
         #########
         print('SetupCog loaded')
 
-
-    # check if a arg is passed in
-    # if it isnt passed, set to NONE
-
     @commands.command()
     #@commands.has_permissions(administrator = True)
     async def trconfig(self, ctx, *args):
-        users_to_set_lang = []
-        #get user id
-        argCount = len(args)
-        #if user passes in multiple arguments, check if it is a valid user
-        if argCount > 0:
-            for arg in args:
-                ### URGENT!!!!!!!!  still need to check if valid user
-                user_id = int(arg[2:-1])
-                user_object = ctx.guild.get_member(int(user_id))
-                if user_object != None:
-                    print(f'user -> {user_id}')
-                    print(f'user_object -> {user_object}')
-                    users_to_set_lang.append(user_id)
-                else:
-                    print('not valid user')
+
         #send select menu to user
-        select_view = SelectView(selected_users=users_to_set_lang)
+        select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 
 async def setup(client):
