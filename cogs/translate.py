@@ -79,11 +79,10 @@ class Translate(commands.Cog):
 
         channel = message.channel
         server_key = {'server_id': server_id}
-        lang = col.find_one(server_key)
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
         ### this is where u made change to test
-        server_lang = lang['userlangs']
+        server_lang = server_sub['user_langs']
         print(f'SERVER LANG ----------> server_lang <-----------')
         ###
 
