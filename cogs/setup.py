@@ -62,7 +62,7 @@ class SelectLanguage(discord.ui.Select):
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 10, user=123456789):
-        super().__init__(timeout=timeout, user)
+        super(self).__init__(timeout=timeout, user)
         self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
