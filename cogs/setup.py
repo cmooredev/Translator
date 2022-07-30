@@ -56,7 +56,7 @@ class SelectLanguage(discord.ui.Select):
                 print(user)
                 #update server info
                 result = col.update_one(server_key, {'$set':specs}, True)
-                result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
+                result = col.update_one(server_key, {'$set': {f"user_langs.{user}": user_choice}}, True)
 
         else:
             print('Empty list')
