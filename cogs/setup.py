@@ -60,7 +60,7 @@ class SelectLanguage(discord.ui.Select):
         ## print self specific user to check
 
 
-        await interaction.response.send_message(content=f"Your choice is xx {user_lang}", ephemeral=True)
+        await interaction.response.send_message(content=f"Your choice is {user_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
@@ -99,12 +99,10 @@ class Setup(commands.Cog):
                 #need to check if valid user
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
-                print(user)
-                print(ctx.guild.members)
-                print(user_object)
 
                 #store specifc user in select view to pass it
                 select_view.specific_user = user_object
+                print(select_view.specific_user)
 
 
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
