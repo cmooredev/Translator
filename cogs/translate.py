@@ -84,7 +84,7 @@ class Translate(commands.Cog):
         ### this is where u made change to test
         server_lang = server_sub[f'user_langs']
 
-        key = {'936034736172826685': {'lang': 'finnish'}
+        key = {'936034736172826685': {'lang': 'finnish'}}
 
         user_lang = server_lang.find_one(key)
 
