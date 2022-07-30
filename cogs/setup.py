@@ -57,21 +57,13 @@ class SelectLanguage(discord.ui.Select):
         user_lang = col.find_one(server_key)
         user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
-        ## print self specific user to check
-        print(self.specific_user)
-
-
-        await interaction.response.send_message(content=f"Your choice is {user_lang}", ephemeral=True)
+        await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 10, specific_user = None):
-        super().__init__(timeout=timeout, specific_user=specific_user)
+    def __init__(self, *, timeout = 10):
+        super().__init__(timeout=timeout)
         self.add_item(SelectLanguage())
-        self.specific_user = specific_user;
-        self.specific_user_lang = '';
-
-
 
 class Setup(commands.Cog):
 
@@ -89,21 +81,19 @@ class Setup(commands.Cog):
 
     @commands.command()
     #@commands.has_permissions(administrator = True)
-    async def trconfig(self, ctx, *args):
-        #send select menu to user
-        select_view = SelectView()
+    async def config(self, ctx, *args):
         #get user id
         argCount = len(args)
-        #if user passes in multiple arguments, check if it is a valid user
         if argCount > 0:
             for arg in args:
                 #need to check if valid user
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
-
+                print(user)
+                print(ctx.guild.members)
                 print(user_object)
-
-
+        #send select menu to user
+        select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 
 async def setup(client):
