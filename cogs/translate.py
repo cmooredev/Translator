@@ -83,9 +83,11 @@ class Translate(commands.Cog):
         server_credits = server_sub['credits']
         ### this is where u made change to test
         server_lang = server_sub[f'user_langs']
-        user_lang = server_lang.find({user_id : {'$exists': 1}})
+
 
         print(f'SERVER LANG ----------> {server_lang} <-----------')
+
+        user_lang = server_lang.find({user_id : {'$exists': 1}})
         print(f'USER LANG ----------> {user_lang} <-----------')
         ###
 
