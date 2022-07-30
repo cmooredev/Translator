@@ -87,7 +87,7 @@ class Translate(commands.Cog):
 
         print(f'SERVER LANG ----------> {server_lang} <-----------')
 
-        user_lang = server_lang.find({user_id : {'$exists': 1}})
+        user_lang = server_lang.find({},{'lang':1})
         print(f'USER LANG ----------> {user_lang} <-----------')
         ###
 
