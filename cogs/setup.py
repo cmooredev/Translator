@@ -97,8 +97,8 @@ class Setup(commands.Cog):
                 user = int(arg[2:-1])
                 user_object = ctx.guild.get_member(int(user))
                 print(f'user -> {user}')
-                print(f'user_object -> {ctx.guild.get_member(int(user))}')
-                print(f'all members -> {ctx.guild.members}')
+                print(f'user_object -> {user_object}')
+                print(f'all members -> ' {ctx.guild.members})
                 users_to_set_lang.append(user_object)
         #send select menu to user
         select_view = SelectView(selected_users=['user1', 'user2'])

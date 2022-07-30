@@ -10,6 +10,7 @@ TOKEN = os.getenv('TOKEN')
 MONGO_URI = os.getenv('MONGO_URI')
 
 intents = discord.Intents.default()
+intents.members = True
 intents.message_content = True
 
 #start discord client
