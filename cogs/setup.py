@@ -51,6 +51,7 @@ class SelectLanguage(discord.ui.Select):
         server_key = {"server_id" : server_id}
         server_sub = col.find_one(server_key)
         server_lang = server_sub[f'user_langs']
+        user_choice = server_lang.append(user_choice)
         #update server info
         result = col.update_one(server_key, {'$set':specs}, True)
 
