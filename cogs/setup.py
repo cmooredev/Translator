@@ -67,9 +67,9 @@ class SelectView(discord.ui.View):
     def __init__(self, *, timeout = 10):
         super().__init__(timeout=timeout)
         self.add_item(SelectLanguage())
+        self.specific_user = '';
+        self.specific_user_lang = '';
 
-    specific_user = '';
-    specific_user_lang = '';
 
 
 class Setup(commands.Cog):
