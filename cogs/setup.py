@@ -40,8 +40,8 @@ class SelectLanguage(discord.ui.Select):
         user = interaction.user
         user_id = interaction.user.id
         user_choice =  {
-            "user": user_id,
-            "lang": chosen_lang
+            {"user": user_id,
+            "lang": chosen_lang}
         }
 
 
