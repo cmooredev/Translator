@@ -95,7 +95,7 @@ class Setup(commands.Cog):
             for arg in args:
                 ### URGENT!!!!!!!!  still need to check if valid user
                 user = int(arg[2:-1])
-                user_object = ctx.guild.get_member(936034736172826685)
+                user_object = ctx.guild.get_member(int(user))
                 print(f'user -> {user}')
                 print(f'user_object -> {user_object}')
                 users_to_set_lang.append(user_object)
