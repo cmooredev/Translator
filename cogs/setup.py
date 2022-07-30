@@ -61,9 +61,9 @@ class SelectLanguage(discord.ui.Select):
         self.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, timeout = 10):
+    def __init__(self, *, timeout = 10, selected_user = 12345):
         super().__init__(timeout=timeout)
-        self.selected_user = 12345
+        self.selected_user = selected_user
         self.add_item(SelectLanguage())
 
 class Setup(commands.Cog):
@@ -99,7 +99,7 @@ class Setup(commands.Cog):
                 print(ctx.guild.members)
                 print(user_object)
         #send select menu to user
-        select_view = SelectView()
+        select_view = SelectView(selected_user=54321)
         print(select_view.selected_user)
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 
