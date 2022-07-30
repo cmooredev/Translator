@@ -83,7 +83,7 @@ class Translate(commands.Cog):
         server_credits = server_sub['credits']
         ### this is where u made change to test
         server_lang = server_sub['user_langs']
-        print(f'SERVER LANG ----------> server_lang <-----------')
+        print(f'SERVER LANG ----------> {server_lang} <-----------')
         ###
 
         if 'Translate' in str(message.author.roles):
