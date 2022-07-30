@@ -48,17 +48,16 @@ class SelectLanguage(discord.ui.Select):
         }
 
         server_key = {"server_id" : server_id}
-        #update server info
-        result = col.update_one(server_key, {'$set':specs}, True)
-        result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
+
 
         selected_users = self.view.selected_user
         if selected_users != []:
             for user in selected_users:
                 print(user)
-                print(user_id)
-                #user_lang = col.find_one(server_key)
-                #user_lang = user_lang['user_langs'][f'{user}']['lang']
+                #update server info
+                result = col.update_one(server_key, {'$set':specs}, True)
+                result = col.update_one(server_key, {'$set': {f"user_langs.{user_id}": user_choice}}, True)
+
         else:
             print('Empty list')
         ## retrieve a user's lang
