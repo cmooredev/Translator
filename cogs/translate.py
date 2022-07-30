@@ -59,6 +59,7 @@ class Translate(commands.Cog):
 
         #take users information to display in embedded message
         user_message = str(message.content)
+        user_id = int(message.author.id)
 
         #ignore commands
         if user_message[0] == '.':
@@ -81,7 +82,10 @@ class Translate(commands.Cog):
         lang = col.find_one(server_key)
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
-        server_lang = lang['target_lang']
+        ### this is where u made change to test
+        server_lang = lang['userlangs']['{user_id}']
+        print(f'SERVER LANG ----------> server_lang <-----------')
+        ###
 
         if 'Translate' in str(message.author.roles):
 
