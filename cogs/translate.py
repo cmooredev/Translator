@@ -85,6 +85,7 @@ class Translate(commands.Cog):
 
         user_langs = server_sub[f'user_langs']
         print(user_langs)
+        print(user_langs['936034736172826685'])
 
         if 'Translate' in str(message.author.roles):
 
