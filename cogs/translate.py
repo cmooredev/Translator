@@ -59,6 +59,7 @@ class Translate(commands.Cog):
 
         #take users information to display in embedded message
         user_message = str(message.content)
+        user_id = message.author.id
 
         #ignore commands
         if user_message[0] == '.':
@@ -83,7 +84,9 @@ class Translate(commands.Cog):
         server_credits = server_sub['credits']
         server_lang = lang['target_lang']
         id = 936034736172826685
-        user_lang = server_sub[f'user_langs'][f'{936034736172826685}']
+        user_lang = server_sub[f'user_langs'][f'{user_id}']['lang']
+        print(id)
+        print(user_id)
         print(user_lang)
 
 
