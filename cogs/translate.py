@@ -82,12 +82,7 @@ class Translate(commands.Cog):
         lang = col.find_one(server_key)
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
-        server_lang = lang['target_lang']
-        id = 936034736172826685
         user_lang = server_sub[f'user_langs'][f'{user_id}']['lang']
-        print(id)
-        print(user_id)
-        print(user_lang)
 
 
         if 'Translate' in str(message.author.roles):
@@ -97,14 +92,14 @@ class Translate(commands.Cog):
             lingua_lang = lingua_result.name
             print(lingua_lang)
 
-            if lingua_lang.lower() == server_lang.lower():
+            if lingua_lang.lower() == user_lang.lower():
                 return
 
             len_chars = len(user_message)
             if lingua_lang.lower() not in basic_languages:
-                google_target_lang = basic_languages[server_lang]
+                google_target_lang = basic_languages[user_lang]
 
-                if server_lang == 'english':
+                if user_lang == 'english':
                     google_target_lang = 'en'
 
                 credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
@@ -131,7 +126,7 @@ class Translate(commands.Cog):
 
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
-            result = translator.translate_text(user_message, target_lang=basic_languages[server_lang])
+            result = translator.translate_text(user_message, target_lang=basic_languages[user_lang])
             #if translation results in same message
             if str(user_message) == str(result):
                 print(f"No translation found. ---- {result}")
