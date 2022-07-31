@@ -82,10 +82,10 @@ class Translate(commands.Cog):
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
         server_lang = lang['target_lang']
+        id = 936034736172826685
+        user_lang = server_sub[f'user_langs'][f'{936034736172826685}']]
+        print(user_lang)
 
-        user_langs = server_sub[f'user_langs']
-        print(user_langs)
-        print(user_langs['936034736172826685'])
 
         if 'Translate' in str(message.author.roles):
 
