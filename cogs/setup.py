@@ -83,17 +83,6 @@ class Setup(commands.Cog):
     @commands.command()
     #@commands.has_permissions(administrator = True)
     async def trconfig(self, ctx, *args):
-        #get user id
-        argCount = len(args)
-        if argCount > 0:
-            for arg in args:
-                #need to check if valid user
-                user = int(arg[2:-1])
-                user_object = ctx.guild.get_member(int(user))
-                print(user)
-                print(ctx.guild.members)
-                print(user_object)
-        #send select menu to user
         select_view = SelectView()
         msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
 

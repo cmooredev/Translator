@@ -150,11 +150,11 @@ class Translate(commands.Cog):
     @commands.command()
     async def stats(self, ctx):
         server_key = {'server_id': ctx.guild.id}
-        lang = col.find_one(server_key)
-        result = lang['target_lang']
         server_credits = col.find_one(server_key)
         current_credits = server_credits['credits']
-        await ctx.send(f'Current target language: {result.upper()} Credits: {current_credits}')
+        reg_date = server_access['registration_date']
+        to_expired = (datetime.now() - reg_date).days
+        await ctx.send(f'Credits left: {current_credits} \nDays left: {to_expired}')
 
 async def setup(client):
     await client.add_cog(Translate(client))
