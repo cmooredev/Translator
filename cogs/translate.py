@@ -82,7 +82,12 @@ class Translate(commands.Cog):
         lang = col.find_one(server_key)
         server_sub = col.find_one(server_key)
         server_credits = server_sub['credits']
-        user_lang = server_sub[f'user_langs'][f'{user_id}']['lang']
+        try:
+            user_lang = server_sub[f'user_langs'][f'{user_id}']['lang']
+            print(user_lang)
+        except:
+            print('No langs found, default to english')
+            user_lang = 'english'
 
 
         if 'Translate' in str(message.author.roles):
@@ -143,7 +148,7 @@ class Translate(commands.Cog):
 
 
     @commands.command()
-    async def trstats(self, ctx):
+    async def stats(self, ctx):
         server_key = {'server_id': ctx.guild.id}
         lang = col.find_one(server_key)
         result = lang['target_lang']
