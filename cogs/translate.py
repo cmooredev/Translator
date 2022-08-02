@@ -8,6 +8,7 @@ from lingua import LanguageDetectorBuilder
 import pymongo
 from google.cloud import translate_v2 as translate
 from google.oauth2 import service_account
+from datetime import datetime
 
 from .authenticate import auth_apikey
 from .languages import basic_languages, lingua_languages
@@ -150,11 +151,13 @@ class Translate(commands.Cog):
     @commands.command()
     async def stats(self, ctx):
         server_key = {'server_id': ctx.guild.id}
-        server_credits = col.find_one(server_key)
-        current_credits = server_credits['credits']
-        reg_date = server_access['registration_date']
-        to_expired = (datetime.now() - reg_date).days
-        await ctx.send(f'Credits left: {current_credits} \nDays left: {to_expired}')
+        server = col.find_one(server_key)
+        current_credits = server['credits']
+        reg_date = server['registration_date']
+        to_expired = datetime.now() - reg_date
+        result = f'Credits left: {current_credits} \n Days left: {to_expired.days}'
+        embed=discord.Embed(description=result)
+        await ctx.send(embed=embed)
 
 async def setup(client):
     await client.add_cog(Translate(client))
