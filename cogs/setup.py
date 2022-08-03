@@ -18,6 +18,8 @@ class SelectLanguage(discord.ui.Select):
         options=[
             discord.SelectOption(label="bulgarian", emoji="🇧🇬", description="bulgarian"),
             discord.SelectOption(label="czech", emoji="🇨🇿", description="czech"),
+            discord.SelectOption(label="chinese", emoji="🇨🇳", description="chinese"),
+            discord.SelectOption(label="dutch", emoji="🇷🇺", description="dutch"),
             discord.SelectOption(label="danish", emoji="🇩🇰", description="danish"),
             discord.SelectOption(label="english", emoji="🇺🇸", description="english"),
             discord.SelectOption(label="estonian", emoji="🇪🇪", description="estonian"),
@@ -29,8 +31,16 @@ class SelectLanguage(discord.ui.Select):
             discord.SelectOption(label="indonesian", emoji="🇮🇩", description="indonesian"),
             discord.SelectOption(label="italian", emoji="🇮🇹", description="italian"),
             discord.SelectOption(label="japanese", emoji="🇯🇵", description="japanese"),
+            discord.SelectOption(label="lithuanian", emoji="🇱🇹", description="lithuanian"),
+            discord.SelectOption(label="latvian", emoji="🇱🇻", description="latvian"),
+            discord.SelectOption(label="portuguese", emoji="🇵🇹", description="portuguese"),
             discord.SelectOption(label="polish", emoji="🇵🇱", description="polish"),
             discord.SelectOption(label="spanish", emoji="🇪🇸", description="spanish"),
+            discord.SelectOption(label="slovak", emoji="🇸🇰", description="slovak"),
+            discord.SelectOption(label="slovenian", emoji="🇸🇮", description="slovenian"),
+            discord.SelectOption(label="turkish", emoji="🇹🇷", description="turkish"),
+            discord.SelectOption(label="russian", emoji="🇷🇺", description="russian"),
+            discord.SelectOption(label="romanian", emoji="🇷🇴", description="romanian"),
 
         ]
         super().__init__(placeholder="Languages",
@@ -59,7 +69,7 @@ class SelectLanguage(discord.ui.Select):
         #user_lang = col.find_one(server_key)
         #user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
-        await interaction.response.send_message(content=f"Your choice is {chosen_lang}", ephemeral=True)
+        await interaction.response.send_message(content=f"{chosen_lang}", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
@@ -84,7 +94,17 @@ class Setup(commands.Cog):
     #@commands.has_permissions(administrator = True)
     async def setlang(self, ctx, *args):
         select_view = SelectView()
-        msg = await ctx.send("Select what language you would like to translate text to: \nThis message will delete in 10 seconds.", view=select_view, delete_after=10)
+        msg = await ctx.send("Select language\nMenu will delete in 12s", view=select_view, delete_after=12)
+
+    @commands.command()
+    async def speakyhelp(self, ctx):
+        result = '.setlang -> sets language for using interacting with select menu \
+                \n .stats -> check current credits and time until expiration \
+                \n You must create a role called Translate and give it to each \
+                member that you would like to be translated.  Each user can select \
+                their own language to translate into.'
+        embed=discord.Embed(description=result)
+        await ctx.send(embed=embed)
 
 async def setup(client):
     await client.add_cog(Setup(client))

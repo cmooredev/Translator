@@ -28,7 +28,16 @@ def auth_apikey(server_id):
     server_access = col.find_one(server_key)
 
     if server_access is None:
+        #give free credits to new user
+        specs = {
+            "server_id" : server_id,
+            "key": 100,
+            "registration_date": datetime.now(),
+            "credits": 500,
+        }
+        result = col.update_one(server_key ,{"$set":specs}, True)
         print('No key found.')
+
         return False
 
     #get registration date and check if expired
