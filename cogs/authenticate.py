@@ -32,7 +32,7 @@ def auth_apikey(server_id):
         specs = {
             "server_id" : server_id,
             "key": 100,
-            "registration_date": datetime.now(),
+            "registration_date": (datetime.now()  - datetime.timedelta()),
             "credits": 500,
         }
         result = col.update_one(server_key ,{"$set":specs}, True)

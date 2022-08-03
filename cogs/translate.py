@@ -150,6 +150,9 @@ class Translate(commands.Cog):
 
     @commands.command()
     async def stats(self, ctx):
+        server_id = ctx.guild.id
+        if auth_apikey(server_id) == False:
+            return
         server_key = {'server_id': ctx.guild.id}
         server = col.find_one(server_key)
         current_credits = server['credits']

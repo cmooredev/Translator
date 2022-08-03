@@ -98,6 +98,9 @@ class Setup(commands.Cog):
 
     @commands.command()
     async def speakyhelp(self, ctx):
+        server_id = ctx.guild.id
+        if auth_apikey(server_id) == False:
+            return
         result = '.setlang -> sets language for using interacting with select menu \
                 \n .stats -> check current credits and time until expiration \
                 \n You must create a role called Translate and give it to each \
