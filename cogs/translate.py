@@ -12,6 +12,7 @@ from datetime import datetime
 
 from .authenticate import auth_apikey
 from .languages import basic_languages, lingua_languages
+from .libretrans import free_trans
 
 detector = LanguageDetectorBuilder.from_languages(*lingua_languages).build()
 
@@ -54,13 +55,16 @@ class Translate(commands.Cog):
 
         server_id = message.guild.id
 
-        #authenticate server
-        if auth_apikey(server_id) == False:
-            return
-
         #take users information to display in embedded message
         user_message = str(message.content)
         user_id = message.author.id
+
+        len_chars = len(user_message)
+
+        #authenticate server
+        if auth_apikey(server_id, len_chars) == False:
+            return
+            
 
         #ignore commands
         if user_message[0] == '.':
@@ -90,6 +94,7 @@ class Translate(commands.Cog):
             print('No langs found, default to english')
             user_lang = 'english'
 
+        
 
         if 'Translate' in str(message.author.roles):
 
@@ -98,10 +103,27 @@ class Translate(commands.Cog):
             lingua_lang = lingua_result.name
             print(lingua_lang)
 
+
             if lingua_lang.lower() == user_lang.lower():
                 return
 
-            len_chars = len(user_message)
+            global_credit_key = {'credit_count': 1}
+
+            if auth_apikey(server_id, len_chars) == 'Libre':
+                libre_user_lang = basic_languages[user_lang]
+                if user_lang == 'english':
+                    libre_user_lang = 'en'
+                libre_result = free_trans(user_message, libre_user_lang)
+                await channel.typing()
+                #refactor this into a function
+                embed=discord.Embed(description=libre_result, color=0xFF5733)
+                #displays user avatar
+                embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
+                await message.channel.send(embed=embed)
+                total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
+                return
+
+
             if lingua_lang.lower() not in basic_languages:
                 google_target_lang = basic_languages[user_lang]
 
@@ -109,6 +131,7 @@ class Translate(commands.Cog):
                     google_target_lang = 'en'
 
                 credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+                total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
                 google_detected_lang = result['detectedSourceLanguage']
@@ -129,7 +152,7 @@ class Translate(commands.Cog):
 
             #increment counter
             credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
-
+            total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
             result = translator.translate_text(user_message, target_lang=basic_languages[user_lang])
@@ -147,20 +170,28 @@ class Translate(commands.Cog):
             await message.channel.send(embed=embed)
             return
 
-
     @commands.command()
     async def stats(self, ctx):
-        server_id = ctx.guild.id
-        if auth_apikey(server_id) == False:
-            return
         server_key = {'server_id': ctx.guild.id}
         server = col.find_one(server_key)
         current_credits = server['credits']
+        '''
+        ---remove time limits for now
+        
         reg_date = server['registration_date']
         to_expired = datetime.now() - reg_date
-        result = f'Credits left: {current_credits} \n Days left: {to_expired.days}'
+        to_expired_days = 30 - to_expired.days
+        '''
+        result = f'Credits left: {current_credits} \n Credits no longer expire.'
         embed=discord.Embed(description=result)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def reload(self, ctx):
+        for filename in os.listdir('./cogs'):
+            if filename.endswith('.py'):
+                await client.reload_extension(f'cogs.{filename[:-3]}')
+
 
 async def setup(client):
     await client.add_cog(Translate(client))

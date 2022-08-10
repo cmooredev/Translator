@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import pymongo
 from datetime import datetime
+from datetime import timedelta
 
 load_dotenv()
 DEEPL_AUTH = os.getenv('DEEPL_AUTH')
@@ -22,18 +23,19 @@ class Authenticate(commands.Cog):
     async def on_ready(self):
         print('Authenticate loaded')
 
-def auth_apikey(server_id):
+def auth_apikey(server_id, len_chars):
     #get server and check if there is valid key
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
 
     if server_access is None:
+        print('adding new key')
         #give free credits to new user
         specs = {
             "server_id" : server_id,
-            "key": 100,
-            "registration_date": (datetime.now()  - datetime.timedelta()),
-            "credits": 500,
+            "key": 1000,
+            "registration_date": datetime.now() - timedelta(days=1),
+            "credits": 1000,
         }
         result = col.update_one(server_key ,{"$set":specs}, True)
         print('No key found.')
@@ -46,12 +48,19 @@ def auth_apikey(server_id):
 
     if to_expired.days < 0:
         print('Expired key...')
-        return False
+        #remove 30 day restriction for now
+        #return False
 
     credits = server_access['credits']
     if credits < 0:
-        print('Ran out of credits...')
-        return False
+        print('Ran out of credits...free translator used')
+        return 'Libre'
+
+    if len_chars > credits:
+        print('Not enough credits to translate message')
+        return 'Libre'
+
+
     print(f'========== {server_id} ==========')
     print(f'{30 - to_expired.days} days left until expired')
     print(f'{credits} are left for the month.')

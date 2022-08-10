@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import pymongo
 from dotenv import load_dotenv
 import os
@@ -82,32 +82,50 @@ class Setup(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @tasks.loop(seconds=600.0)
+    async def change_status(self):
+        await self.client.change_presence(activity=discord.Game('.speakyhelp'))
+
     @commands.Cog.listener()
     async def on_ready(self):
         #need to implement setup that lets users configure target lang
         #select = Select()
         #load initial settings here
         #########
+        await self.client.wait_until_ready()
+        self.change_status.start()
         print('SetupCog loaded')
 
+   
     @commands.command()
     #@commands.has_permissions(administrator = True)
     async def setlang(self, ctx, *args):
         select_view = SelectView()
-        msg = await ctx.send("Select language\nMenu will delete in 12s", view=select_view, delete_after=12)
+        msg = await ctx.send("User must have role 'Translate' for bot to translate their text.\nSelect language\nMenu will delete in 12s", view=select_view, delete_after=12)
 
     @commands.command()
     async def speakyhelp(self, ctx):
-        server_id = ctx.guild.id
-        if auth_apikey(server_id) == False:
-            return
-        result = '.setlang -> sets language for using interacting with select menu \
-                \n .stats -> check current credits and time until expiration \
-                \n You must create a role called Translate and give it to each \
-                member that you would like to be translated.  Each user can select \
-                their own language to translate into.'
+        result = '**Commands**\n\
+                `.setlang` -> sets language for using interacting with select menu \
+                \n`.stats` -> check current credits for paid services \
+                \n`.translate` -> give yourself the translate role \
+                \n\n**Required Role**\
+                \nUsers must have the translate role in order for the bot to recognize them.\
+                \n\nYou can use unlimited free translations when you run out of paid credits.  The free translator\
+                will be marked with a red bar on the left of the embed message.\
+                \n\n**Purchase Credits**\
+                *www.hellabots.com*'
         embed=discord.Embed(description=result)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def translate(self, ctx):
+        role = discord.utils.get(ctx.guild.roles, name="Translate")
+        print(role)
+        if role is None:
+            role = await ctx.guild.create_role(name="Translate", colour=discord.Colour.blue())
+        await ctx.author.add_roles(role)
+
 
 async def setup(client):
     await client.add_cog(Setup(client))

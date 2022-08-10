@@ -7,7 +7,7 @@ basic_languages = {
     'english':'EN-US',
     'spanish':'ES',
     'bulgarian': 'BG',
-    'czech': 'CZ',
+    'czech': 'CS',
     'danish': 'DA',
     'german': 'DE',
     'greek': 'EL',

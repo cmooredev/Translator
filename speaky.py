@@ -2,8 +2,9 @@ import discord
 import asyncio
 import pymongo
 import os
-from discord.ext import commands
+from discord.ext import commands, tasks
 from dotenv import load_dotenv
+
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -19,6 +20,7 @@ client = commands.Bot(command_prefix = '.', intents=intents)
 #start mongodb client
 mongodb_client = pymongo.MongoClient(MONGO_URI)
 
+
 @client.event
 async def on_ready():
     print('Bot is online')
@@ -32,5 +34,6 @@ async def main():
     async with client:
         await load()
         await client.start(TOKEN)
+        
 
 asyncio.run(main())
