@@ -110,10 +110,11 @@ class Setup(commands.Cog):
 
     @commands.command()
     async def speakyhelp(self, ctx):
-        result = '**Commands**\n\
-                `.setlang` -> sets language for using interacting with select menu \
-                \n`.stats` -> check current credits for paid services \
-                \n`.translate` -> give yourself the translate role \
+        result = '**Commands**\
+                \n\n`.setlang` -> sets language for using interacting with select menu \
+                \nThis will also give you the Translate role.  To stop translations, remove this role.  \
+                \n\n`.stats` -> check current credits for paid services \
+                \n\n`.untranslate` -> Remove the translate role \
                 \n\n**Required Role**\
                 \nUsers must have the translate role in order for the bot to recognize them.\
                 \n\nYou can use unlimited free translations when you run out of paid credits.  The free translator\
@@ -122,6 +123,15 @@ class Setup(commands.Cog):
                 *www.hellabots.com*'
         embed=discord.Embed(description=result)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def untranslate(self, ctx):
+        role = discord.utils.get(ctx.guild.roles, name="Translate")
+        print(role)
+        if role is None:
+            return
+        await ctx.author.remove_roles(role)
+
 
 async def setup(client):
     await client.add_cog(Setup(client))
