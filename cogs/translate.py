@@ -111,8 +111,12 @@ class Translate(commands.Cog):
 
             if auth_apikey(server_id, len_chars) == 'Libre':
                 libre_user_lang = basic_languages[user_lang]
+                
                 if user_lang == 'english':
                     libre_user_lang = 'en'
+                elif user_lang == 'portuguese':
+                    libre_user_lang = 'pt'
+
                 libre_result = free_trans(user_message, libre_user_lang)
                 await channel.typing()
                 #refactor this into a function

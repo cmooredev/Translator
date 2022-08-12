@@ -16,7 +16,7 @@ col = db["api_keys"]
 class SelectLanguage(discord.ui.Select):
     def __init__(self):
         options=[
-            discord.SelectOption(label="bulgarian", emoji="🇧🇬", description="bulgarian"),
+            discord.SelectOption(label="bulgarian", emoji="🇧🇬", description="bulgarian - not available in free mode"),
             discord.SelectOption(label="czech", emoji="🇨🇿", description="czech"),
             discord.SelectOption(label="chinese", emoji="🇨🇳", description="chinese"),
             discord.SelectOption(label="dutch", emoji="🇷🇺", description="dutch"),
@@ -31,16 +31,16 @@ class SelectLanguage(discord.ui.Select):
             discord.SelectOption(label="indonesian", emoji="🇮🇩", description="indonesian"),
             discord.SelectOption(label="italian", emoji="🇮🇹", description="italian"),
             discord.SelectOption(label="japanese", emoji="🇯🇵", description="japanese"),
-            discord.SelectOption(label="lithuanian", emoji="🇱🇹", description="lithuanian"),
-            discord.SelectOption(label="latvian", emoji="🇱🇻", description="latvian"),
+            discord.SelectOption(label="lithuanian", emoji="🇱🇹", description="lithuanian - not available in free mode"),
+            discord.SelectOption(label="latvian", emoji="🇱🇻", description="latvian - not available in free mode"),
             discord.SelectOption(label="portuguese", emoji="🇵🇹", description="portuguese"),
             discord.SelectOption(label="polish", emoji="🇵🇱", description="polish"),
             discord.SelectOption(label="spanish", emoji="🇪🇸", description="spanish"),
             discord.SelectOption(label="slovak", emoji="🇸🇰", description="slovak"),
-            discord.SelectOption(label="slovenian", emoji="🇸🇮", description="slovenian"),
+            discord.SelectOption(label="slovenian", emoji="🇸🇮", description="slovenian - not available in free mode"),
             discord.SelectOption(label="turkish", emoji="🇹🇷", description="turkish"),
             discord.SelectOption(label="russian", emoji="🇷🇺", description="russian"),
-            discord.SelectOption(label="romanian", emoji="🇷🇴", description="romanian"),
+            discord.SelectOption(label="romanian", emoji="🇷🇴", description="romanian  - not available in free mode"),
 
         ]
         super().__init__(placeholder="Languages",

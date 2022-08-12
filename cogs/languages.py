@@ -3,7 +3,6 @@ from discord.ext import commands
 from lingua import Language
 
 basic_languages = {
-    'french':'FR',
     'english':'EN-US',
     'spanish':'ES',
     'bulgarian': 'BG',
@@ -12,7 +11,8 @@ basic_languages = {
     'german': 'DE',
     'greek': 'EL',
     'estonian': 'ET',
-    'finnish': 'FT',
+    'finnish': 'FI',
+    'french':'FR',
     'hungarian': 'HU',
     'italian': 'IT',
     'japanese': 'JA',
@@ -28,7 +28,7 @@ basic_languages = {
     'turkish': 'TR',
     'swedish': 'SV',
     'chinese': 'ZH',
-    'indonesian': 'IN',
+    'indonesian': 'ID',
 }
 
 ext_languages = {
