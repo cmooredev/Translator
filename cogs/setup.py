@@ -100,6 +100,11 @@ class Setup(commands.Cog):
     @commands.command()
     #@commands.has_permissions(administrator = True)
     async def setlang(self, ctx, *args):
+        role = discord.utils.get(ctx.guild.roles, name="Translate")
+        print(role)
+        if role is None:
+            role = await ctx.guild.create_role(name="Translate", colour=discord.Colour.blue())
+        await ctx.author.add_roles(role)
         select_view = SelectView()
         msg = await ctx.send("User must have role 'Translate' for bot to translate their text.\nSelect language\nMenu will delete in 12s", view=select_view, delete_after=12)
 
@@ -117,15 +122,6 @@ class Setup(commands.Cog):
                 *www.hellabots.com*'
         embed=discord.Embed(description=result)
         await ctx.send(embed=embed)
-
-    @commands.command()
-    async def translate(self, ctx):
-        role = discord.utils.get(ctx.guild.roles, name="Translate")
-        print(role)
-        if role is None:
-            role = await ctx.guild.create_role(name="Translate", colour=discord.Colour.blue())
-        await ctx.author.add_roles(role)
-
 
 async def setup(client):
     await client.add_cog(Setup(client))
