@@ -3,6 +3,7 @@ import os
 import deepl
 import json
 from discord.ext import commands
+from discord import app_commands
 from dotenv import load_dotenv
 from lingua import LanguageDetectorBuilder
 import pymongo
@@ -41,7 +42,6 @@ class Translate(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-
         print('TranslatorCog loaded')
 
     @commands.Cog.listener()
@@ -118,12 +118,19 @@ class Translate(commands.Cog):
                     libre_user_lang = 'pt'
 
                 libre_result = free_trans(user_message, libre_user_lang)
+
+                if str(user_message) == libre_result or str(user_message) == libre_result[:-1]:
+                    print(f"No translation found through libre. ---- {libre_result}")
+                    return
+                
+
                 await channel.typing()
                 #refactor this into a function
                 embed=discord.Embed(description=libre_result, color=0xFF5733)
                 #displays user avatar
                 embed.set_author(name=message.author.display_name, icon_url=message.author.avatar)
                 await message.channel.send(embed=embed)
+                credit_result = col.update_one(server_key, {'$inc': {'char-translated': len_chars}})
                 total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
                 return
 
@@ -135,6 +142,7 @@ class Translate(commands.Cog):
                     google_target_lang = 'en'
 
                 credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+                credit_result = col.update_one(server_key, {'$inc': {'char-translated': len_chars}})
                 total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
                 #enter code for google translate
                 result = gtranslate_client.translate(user_message, target_language=google_target_lang.lower())
@@ -156,6 +164,7 @@ class Translate(commands.Cog):
 
             #increment counter
             credit_result = col.update_one(server_key, {'$inc': {'credits': -1*len_chars}})
+            credit_result = col.update_one(server_key, {'$inc': {'char-translated': len_chars}})
             total_credit_update = col.update_one(global_credit_key, {'$inc': {'total_credits': len_chars}})
             translator = deepl.Translator(DEEPL_AUTH)
             #translate message into target language
@@ -174,9 +183,9 @@ class Translate(commands.Cog):
             await message.channel.send(embed=embed)
             return
 
-    @commands.command()
-    async def stats(self, ctx):
-        server_key = {'server_id': ctx.guild.id}
+    @app_commands.command()
+    async def stats(self, interaction: discord.Interaction):
+        server_key = {'server_id': interaction.guild.id}
         server = col.find_one(server_key)
         current_credits = server['credits']
         '''
@@ -188,7 +197,7 @@ class Translate(commands.Cog):
         '''
         result = f'Credits left: {current_credits} \n Credits no longer expire.'
         embed=discord.Embed(description=result)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
 
     @commands.command()
     async def reload(self, ctx):

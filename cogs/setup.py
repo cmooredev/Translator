@@ -1,10 +1,13 @@
 import discord
+from discord import app_commands
 from discord.ext import commands, tasks
 import pymongo
 from dotenv import load_dotenv
 import os
 import time
 import asyncio
+from datetime import datetime
+from datetime import timedelta
 
 load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI')
@@ -54,10 +57,20 @@ class SelectLanguage(discord.ui.Select):
             "user_id": user_id
         }
 
+
         server_id = interaction.guild.id
         specs = {
             "server_id" : server_id,
         }
+
+        server_access = col.find_one(specs)
+        if server_access is None:
+            specs = {
+                "server_id" : server_id,
+                "key": 1000,
+                "registration_date": datetime.now() - timedelta(days=1),
+                "credits": 1000,
+            }
 
         server_key = {"server_id" : server_id}
         #update server info
@@ -69,7 +82,7 @@ class SelectLanguage(discord.ui.Select):
         #user_lang = col.find_one(server_key)
         #user_lang = user_lang['user_langs'][f'{user_id}']['lang']
 
-        await interaction.response.send_message(content=f"{chosen_lang}", ephemeral=True)
+        await interaction.response.send_message(content=f"Language selected.", ephemeral=True)
         self.stop()
 
 class SelectView(discord.ui.View):
@@ -79,12 +92,13 @@ class SelectView(discord.ui.View):
 
 class Setup(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
 
     @tasks.loop(seconds=600.0)
     async def change_status(self):
-        await self.client.change_presence(activity=discord.Game('.speakyhelp'))
+        print('bg')
+        #await self.client.change_presence(activity=discord.Game('.speakyhelp'))
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -92,29 +106,29 @@ class Setup(commands.Cog):
         #select = Select()
         #load initial settings here
         #########
-        await self.client.wait_until_ready()
+        await self.bot.wait_until_ready()
         self.change_status.start()
         print('SetupCog loaded')
 
    
-    @commands.command()
+    @app_commands.command()
     #@commands.has_permissions(administrator = True)
-    async def setlang(self, ctx, *args):
-        role = discord.utils.get(ctx.guild.roles, name="Translate")
-        print(role)
+    async def setlang(self, interaction: discord.Interaction):
+        role = discord.utils.get(interaction.guild.roles, name="Translate")
         if role is None:
-            role = await ctx.guild.create_role(name="Translate", colour=discord.Colour.blue())
-        await ctx.author.add_roles(role)
+            role = await interaction.guild.create_role(name="Translate", colour=discord.Colour.blue())
+        await interaction.user.add_roles(role)
         select_view = SelectView()
-        msg = await ctx.send("User must have role 'Translate' for bot to translate their text.\nSelect language\nMenu will delete in 12s", view=select_view, delete_after=12)
+        #msg = await interaction.channel.send("User must have role 'Translate' for bot to translate their text.\nSelect language\nMenu will delete in 12s", view=select_view, delete_after=12)
+        await interaction.response.send_message("Choose a language", view=select_view, ephemeral=True)
 
-    @commands.command()
-    async def speakyhelp(self, ctx):
-        result = '**Commands**\
-                \n\n`.setlang` -> sets language for using interacting with select menu \
+    @app_commands.command()
+    async def speakyhelp(self, interaction: discord.Interaction):
+        result = '**Commands(Slash Commands)**\
+                \n\n`/setlang` -> sets language for using interacting with select menu \
                 \nThis will also give you the Translate role.  To stop translations, remove this role.  \
-                \n\n`.stats` -> check current credits for paid services \
-                \n\n`.untranslate` -> Remove the translate role \
+                \n\n`/stats` -> check current credits for paid services \
+                \n\n`/untranslate` -> Remove the translate role \
                 \n\n**Required Role**\
                 \nUsers must have the translate role in order for the bot to recognize them.\
                 \n\nYou can use unlimited free translations when you run out of paid credits.  The free translator\
@@ -122,16 +136,34 @@ class Setup(commands.Cog):
                 \n\n**Purchase Credits**\
                 *www.hellabots.com*'
         embed=discord.Embed(description=result)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
-    @commands.command()
-    async def untranslate(self, ctx):
-        role = discord.utils.get(ctx.guild.roles, name="Translate")
-        print(role)
+
+    @app_commands.command()
+    async def untranslate(self, interaction: discord.Interaction):
+        role = discord.utils.get(interaction.guild.roles, name="Translate")
         if role is None:
             return
-        await ctx.author.remove_roles(role)
+        await interaction.user.remove_roles(role)
+        await interaction.response.send_message("Translate role has been removed.", ephemeral=True)
 
 
-async def setup(client):
-    await client.add_cog(Setup(client))
+    @commands.command()
+    @commands.is_owner()
+    async def reload_cogs(self, ctx):
+        for filename in os.listdir('./cogs'):
+            if filename.endswith('.py'):
+                await self.bot.reload_extension(f'cogs.{filename[:-3]}')
+        await ctx.send('Cogs reloaded.')
+
+    @commands.command()
+    @commands.is_owner()
+    async def sync(self, ctx) -> None:
+        fmt = await ctx.bot.tree.sync()
+        await ctx.send(
+          f"Synced {len(fmt)} commands."
+        )
+        return
+
+async def setup(bot):
+    await bot.add_cog(Setup(bot))

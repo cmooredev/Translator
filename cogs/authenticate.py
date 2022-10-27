@@ -28,17 +28,8 @@ def auth_apikey(server_id, len_chars):
     server_key = {'server_id': server_id}
     server_access = col.find_one(server_key)
 
+
     if server_access is None:
-        print('adding new key')
-        #give free credits to new user
-        specs = {
-            "server_id" : server_id,
-            "key": 1000,
-            "registration_date": datetime.now() - timedelta(days=1),
-            "credits": 1000,
-        }
-        result = col.update_one(server_key ,{"$set":specs}, True)
-        print('No key found.')
 
         return False
 

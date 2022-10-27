@@ -11,7 +11,6 @@ TOKEN = os.getenv('TOKEN')
 MONGO_URI = os.getenv('MONGO_URI')
 
 intents = discord.Intents.default()
-intents.members = True
 intents.message_content = True
 
 #start discord client
@@ -29,6 +28,7 @@ async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
+
 
 async def main():
     async with client:
