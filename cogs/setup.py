@@ -111,7 +111,7 @@ class Setup(commands.Cog):
         print('SetupCog loaded')
 
    
-    @app_commands.command()
+    @app_commands.command(description='Select the language you would like your text translated into.')
     #@commands.has_permissions(administrator = True)
     async def setlang(self, interaction: discord.Interaction):
         role = discord.utils.get(interaction.guild.roles, name="Translate")
@@ -122,7 +122,7 @@ class Setup(commands.Cog):
         #msg = await interaction.channel.send("User must have role 'Translate' for bot to translate their text.\nSelect language\nMenu will delete in 12s", view=select_view, delete_after=12)
         await interaction.response.send_message("Choose a language", view=select_view, ephemeral=True)
 
-    @app_commands.command()
+    @app_commands.command(description='Help menu for SpeakyBot.')
     async def speakyhelp(self, interaction: discord.Interaction):
         result = '**Commands(Slash Commands)**\
                 \n\n`/setlang` -> sets language for using interacting with select menu \
@@ -139,7 +139,7 @@ class Setup(commands.Cog):
         await interaction.response.send_message(embed=embed)
 
 
-    @app_commands.command()
+    @app_commands.command(description='Remove translation role and stop translating your messages.')
     async def untranslate(self, interaction: discord.Interaction):
         role = discord.utils.get(interaction.guild.roles, name="Translate")
         if role is None:

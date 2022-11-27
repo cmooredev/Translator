@@ -14,7 +14,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 #start discord client
-client = commands.Bot(command_prefix = '.', intents=intents)
+client = commands.Bot(command_prefix = '.', intents=intents, help_command=None)
 
 #start mongodb client
 mongodb_client = pymongo.MongoClient(MONGO_URI)

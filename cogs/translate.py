@@ -183,7 +183,7 @@ class Translate(commands.Cog):
             await message.channel.send(embed=embed)
             return
 
-    @app_commands.command()
+    @app_commands.command(description='Display premium credits in account.')
     async def stats(self, interaction: discord.Interaction):
         server_key = {'server_id': interaction.guild.id}
         server = col.find_one(server_key)
@@ -195,7 +195,7 @@ class Translate(commands.Cog):
         to_expired = datetime.now() - reg_date
         to_expired_days = 30 - to_expired.days
         '''
-        result = f'Credits left: {current_credits} \n Credits no longer expire.'
+        result = f'Credits left: {current_credits} \n'
         embed=discord.Embed(description=result)
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
